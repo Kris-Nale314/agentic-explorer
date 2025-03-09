@@ -1,0 +1,116 @@
+{
+  "session_name": "analysis_multi_agent_20250309_112640",
+  "start_time": 1741534000.691034,
+  "end_time": 1741534000.812738,
+  "duration": 0.1217038631439209,
+  "activities": [
+    {
+      "timestamp": 1741534000.76798,
+      "agent": "system",
+      "activity": "initialize_agents",
+      "input": {
+        "document_length": 2
+      },
+      "output": {
+        "boundary_agent": "Boundary Detective",
+        "document_agent": "Document Analyzer",
+        "summarization_agent": "Summarization Manager",
+        "judge_agent": "Investment Judge"
+      },
+      "reasoning": [
+        "Initialized all agents with tracking capabilities"
+      ],
+      "metadata": {}
+    },
+    {
+      "timestamp": 1741534000.796289,
+      "agent": "system",
+      "activity": "create_crewai_agents",
+      "input": {},
+      "output": {
+        "agent_count": 4
+      },
+      "reasoning": [
+        "Created CrewAI agents that parallel our tracked agents"
+      ],
+      "metadata": {}
+    },
+    {
+      "timestamp": 1741534000.79652,
+      "agent": "system",
+      "activity": "create_tasks",
+      "input": {},
+      "output": {
+        "task_count": 5,
+        "tasks": [
+          "boundary_detection",
+          "document_classification",
+          "document_analysis",
+          "summarization",
+          "synthesis"
+        ]
+      },
+      "reasoning": [
+        "Created 5 tasks for the CrewAI agents to execute sequentially"
+      ],
+      "metadata": {}
+    },
+    {
+      "timestamp": 1741534000.802494,
+      "agent": "system",
+      "activity": "create_crew",
+      "input": {},
+      "output": {
+        "process_type": "sequential"
+      },
+      "reasoning": [
+        "Created CrewAI crew with sequential process flow for easier debugging"
+      ],
+      "metadata": {}
+    },
+    {
+      "timestamp": 1741534000.802509,
+      "agent": "system",
+      "activity": "start_analysis",
+      "input": {
+        "document_length": 2
+      },
+      "output": {
+        "start_time": 1741534000.802509
+      },
+      "reasoning": [
+        "Beginning multi-agent analysis of document"
+      ],
+      "metadata": {}
+    },
+    {
+      "timestamp": 1741534000.812721,
+      "agent": "system",
+      "activity": "analysis_error",
+      "input": {
+        "document_length": 2
+      },
+      "output": {
+        "error": "litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=<utils.openai_client.OpenAIClient object at 0x13ca8b0d0>\n Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers"
+      },
+      "reasoning": [
+        "Error occurred during multi-agent analysis"
+      ],
+      "metadata": {}
+    },
+    {
+      "timestamp": 1741534000.8127308,
+      "agent": "system",
+      "activity": "analysis_statistics",
+      "input": {},
+      "output": {
+        "total_time": 0.010221004486083984,
+        "activity_count": 6
+      },
+      "reasoning": [
+        "Calculated final statistics for the analysis run"
+      ],
+      "metadata": {}
+    }
+  ]
+}

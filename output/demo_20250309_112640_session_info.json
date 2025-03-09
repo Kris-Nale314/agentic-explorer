@@ -1,0 +1,18 @@
+{
+  "session_name": "demo_20250309_112640",
+  "demo_type": "multi_agent",
+  "document_path": "data/dev_eval_files.json",
+  "output_dir": "output",
+  "results": {
+    "crew_result": {
+      "error": "litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=<utils.openai_client.OpenAIClient object at 0x13ca8b0d0>\n Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers"
+    },
+    "tracking": {
+      "session_name": "analysis_multi_agent_20250309_112640",
+      "json_output": "output/analysis_multi_agent_20250309_112640_tracking.json",
+      "markdown_report": "output/analysis_multi_agent_20250309_112640_report.md",
+      "total_time": 0.010221004486083984,
+      "activity_count": 7
+    }
+  }
+}

@@ -71,29 +71,37 @@ These aren't abstract academic issues—they're the root causes of most AI syste
 
 ```
 agentic-explorer/
-├── data/                       # Data processing & generation
-│   ├── data_generation.py      # Creates test datasets using FMP API
-│   └── dev_eval_files.json     # Test documents for development
-├── agents/                     # Specialized agent implementations
-│   ├── summary_agent.py        # Summary note agent
-│   ├── financial_analyst.py    # Financal analsis agent
-│   ├── profile_researcher.py   # Company profiler
-│   ├── news_analyst.py         # News hound agent
-├── processors/                 # Document processing pipeline
-│   ├── document_analyzer.py    # Core document analysis functions
-│   ├── partitioning_strategies.py  # Different document segmentation approaches
-│   ├── summarization_manager.py    # Orchestrates summarization strategies
-│   └── text_processor.py       # Text preprocessing utilities
-├── utils/                      # Shared utilities
-│   ├── fmp_tool.py             # Financial Modeling Prep API client
-│   └── openai_client.py        # OpenAI API wrapper with error handling
-├── tests/                      # Test suite
-│   └── test_document_analysis.py   # Validation for core functionality
-├── content.py                  # Centralized content definitions
+├── data/
+│   ├── samples/                # Example documents for testing
+│   ├── data_generation.py      # Creates test datasets
+│   └── dev_eval_files.json     # Test documents
+├── agents/
+│   ├── base_agent.py           # Common agent functionality
+│   ├── boundary_detective.py   # Document boundary detection
+│   ├── document_analyzer.py    # Document metrics and structure
+│   ├── summarization_manager.py # Multi-strategy summarization
+│   └── analysis_judge.py       # Evaluation and synthesis
+├── processors/
+│   ├── document_processor.py   # Core document handling
+│   ├── partitioning.py         # Document segmentation strategies
+│   ├── summarization.py        # Summarization algorithms
+│   └── text_utils.py           # Text preprocessing utilities
+├── tools/
+│   ├── fmp_tool.py             # Financial data API
+│   ├── visualization_tool.py   # For rendering visualizations
+│   └── document_tools.py       # Document manipulation tools
+├── tests/
+│   ├── test_agents.py
+│   ├── test_processors.py
+│   └── test_integration.py
+├── config.py                   # Configuration management
 ├── analysis.py                 # CrewAI orchestration and task definitions
 ├── orchestration.py            # High-level system orchestration
-├── main.py                     # Streamlit app (coming soon)
-└── README.md                   # You are here!
+├── main.py                     # Main Streamlit app (focused on functionality first)
+├── requirements.txt            # Project dependencies
+├── .env                        # Environment variables (gitignored)
+├── .gitignore                  # Git ignore file
+└── __init__.py                 # Package initialization
 ```
 
 ### Why This Architecture Matters

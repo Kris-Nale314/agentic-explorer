@@ -4,7 +4,6 @@ Content file containing longer explanations, descriptions, and prompts
 used throughout the application for consistency and maintainability.
 """
 
-# Agent descriptions and personas
 AGENT_DESCRIPTIONS = {
     "boundary_detector": {
         "name": "Boundary Detective",
@@ -12,6 +11,27 @@ AGENT_DESCRIPTIONS = {
         "role": "Document Boundary Detective",
         "goal": "Accurately identify where different documents are combined and classify each section",
         "backstory": "I'm an expert at analyzing text to find where different documents have been merged together. I can spot changes in style, topic, entities, and temporal references."
+    },
+    "document_analyzer": {
+        "name": "Document Analyzer",
+        "emoji": "📊",
+        "role": "Document Metrics and Structure Analyst",
+        "goal": "Compute metrics, extract structures, and identify patterns across documents",
+        "backstory": "I specialize in analyzing document structures, calculating metrics, and identifying patterns that reveal how documents are organized and composed."
+    },
+    "summarization_manager": {
+        "name": "Summarization Manager",
+        "emoji": "📚",
+        "role": "Multi-Strategy Summarization Specialist",
+        "goal": "Orchestrate and compare multiple summarization strategies to find the most effective approach",
+        "backstory": "I'm an expert at summarizing complex documents using different approaches, comparing their effectiveness, and providing insights about which strategy works best for different document types."
+    },
+    "analysis_judge": {
+        "name": "Analysis Judge",
+        "emoji": "⚖️",
+        "role": "Synthesis and Evaluation Specialist",
+        "goal": "Synthesize information from all sources to provide balanced, contextual insights and judgments",
+        "backstory": "I carefully weigh all the evidence before making judgments. I consider multiple perspectives, acknowledge uncertainty, and provide balanced assessments based on all available information."
     },
     "financial_analyst": {
         "name": "Financial Analyst",
@@ -36,18 +56,6 @@ AGENT_DESCRIPTIONS = {
     }
 }
 
-# Task descriptions
-TASK_DESCRIPTIONS = {
-    "boundary_detection": "Analyze the provided text to identify where different documents have been combined. Look for changes in style, topic, temporal references, and entities mentioned. For each identified boundary, provide the approximate location (character position), confidence level, and reasoning behind your detection.",
-    
-    "document_classification": "Classify each document segment according to its type (earnings call, news article, analyst report, etc.), the company it discusses, and the time period it covers. Provide evidence for your classification.",
-    
-    "financial_analysis": "Extract key financial metrics, trends, and performance indicators from the provided document segments. Focus on revenue, profit margins, growth rates, and other relevant financial data. Compare these metrics across time periods if applicable.",
-    
-    "news_sentiment": "Analyze the sentiment and key narratives present in the provided document segments. Identify positive/negative sentiment, important events, and how they might impact the company's perception in the market.",
-    
-    "synthesis": "Synthesize all the information provided by the other agents to create a comprehensive analysis. Weigh the different factors appropriately and provide a balanced assessment and recommendation."
-}
 
 # Educational explanations
 EDUCATIONAL_CONTENT = {
@@ -109,4 +117,22 @@ SYSTEM_PROMPTS = {
     """,
     
     # Add other system prompts for different agents here
+}
+
+# Additions to TASK_DESCRIPTIONS in content.py
+
+TASK_DESCRIPTIONS = {
+    "boundary_detection": "Analyze the provided text to identify where different documents have been combined. Look for changes in style, topic, temporal references, and entities mentioned. For each identified boundary, provide the approximate location (character position), confidence level, and reasoning behind your detection.",
+    
+    "document_classification": "Classify each document segment according to its type (earnings call, news article, analyst report, etc.), the company it discusses, and the time period it covers. Provide evidence for your classification.",
+    
+    "document_analysis": "Analyze the document structure and metrics. Compute word counts, sentence counts, paragraph counts, and extract key entities. Identify patterns in the document's structure and organization. Provide a quantitative assessment of the document's characteristics.",
+    
+    "summarization": "Generate multiple summary approaches for the document: standard full-document summary, partition-based summaries that respect document boundaries, and entity-focused summaries. Compare these approaches and recommend which works best for this document type with explanation.",
+    
+    "financial_analysis": "Extract key financial metrics, trends, and performance indicators from the provided document segments. Focus on revenue, profit margins, growth rates, and other relevant financial data. Compare these metrics across time periods if applicable.",
+    
+    "news_sentiment": "Analyze the sentiment and key narratives present in the provided document segments. Identify positive/negative sentiment, important events, and how they might impact the company's perception in the market.",
+    
+    "synthesis": "Synthesize all the information provided by the other agents to create a comprehensive analysis. Weigh the different factors appropriately and provide a balanced assessment. Create an educational explanation of what this analysis reveals about AI document processing capabilities and limitations."
 }

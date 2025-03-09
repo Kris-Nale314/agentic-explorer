@@ -8,3 +8,4 @@ googlesearch-python
 openai
 requests
 chromadb
+nltk

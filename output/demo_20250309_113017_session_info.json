@@ -1,0 +1,7 @@
+{
+  "session_name": "demo_20250309_113017",
+  "demo_type": "multi_agent",
+  "document_path": "data/dev_eval_files.json",
+  "output_dir": "output",
+  "results": {
+    "crew_result": 
