@@ -1,0 +1,10 @@
+streamlit
+crewai
+autogen
+Langchain
+langchain-community
+python-dotenv
+googlesearch-python
+openai
+requests
+chromadb
