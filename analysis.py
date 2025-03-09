@@ -11,8 +11,6 @@ from dotenv import load_dotenv
 from crewai import Crew, Agent, Task, Process
 from langchain_community.chat_models import ChatOpenAI
 from data.content import AGENT_DESCRIPTIONS, TASK_DESCRIPTIONS
-from processors.document_analyzer import DocumentAnalyzer
-from processors.summarization_manager import SummarizationManager
 from agents.agent_tracker import AgentTracker
 from agents.boundary_detective import BoundaryDetectiveAgent
 from agents.document_agent import DocumentAnalyzerAgent
@@ -25,6 +23,39 @@ load_dotenv()
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+def make_serializable(obj):
+    """
+    Convert a complex object to a JSON serializable format.
+    
+    Args:
+        obj: Any Python object
+        
+    Returns:
+        JSON serializable version of the object
+    """
+    if hasattr(obj, 'dict') and callable(getattr(obj, 'dict')):
+        # If object has a dict() method (like Pydantic models)
+        return make_serializable(obj.dict())
+    elif hasattr(obj, '__dict__'):
+        # For general objects with __dict__
+        result = {}
+        for key, value in obj.__dict__.items():
+            if not key.startswith('_'):  # Skip private attributes
+                result[key] = make_serializable(value)
+        return result
+    elif isinstance(obj, dict):
+        # Process dictionaries recursively
+        return {key: make_serializable(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        # Process lists recursively
+        return [make_serializable(item) for item in obj]
+    elif isinstance(obj, (str, int, float, bool, type(None))):
+        # Basic types are already serializable
+        return obj
+    else:
+        # For other types, convert to string
+        return str(obj)
 
 def create_tracked_crew(document_text, session_name=None, output_dir="output"):
     """
@@ -46,7 +77,7 @@ def create_tracked_crew(document_text, session_name=None, output_dir="output"):
     
     logger.info("Creating agents with activity tracking...")
     
-    # Initialize our local agents with tracking
+    # Initialize our local agents with tracking - using thin wrappers
     boundary_agent = BoundaryDetectiveAgent()
     boundary_agent.set_tracker(tracker)
     
@@ -59,7 +90,7 @@ def create_tracked_crew(document_text, session_name=None, output_dir="output"):
     judge_agent = AnalysisJudgeAgent()
     judge_agent.set_tracker(tracker)
     
-    # Initialize the LLM for CrewAI using langchain
+    # Initialize the LLM for CrewAI using langchain - shared instance
     llm = ChatOpenAI(
         model="gpt-3.5-turbo",
         temperature=0.7,
@@ -80,7 +111,7 @@ def create_tracked_crew(document_text, session_name=None, output_dir="output"):
         reasoning=["Initialized all agents with tracking capabilities"]
     )
     
-    # Create CrewAI agents with langchain LLM
+    # Create CrewAI agents with shared langchain LLM
     crew_boundary_agent = Agent(
         role=boundary_agent.role,
         goal=boundary_agent.goal,
@@ -250,7 +281,9 @@ def run_analysis_with_tracking(document_text, session_name=None, output_dir="out
     
     # Run the crew
     try:
-        crew_result = document_crew.kickoff(inputs={"document": document_text})
+        crew_output = document_crew.kickoff(inputs={"document": document_text})
+        # Convert to serializable format
+        crew_result = make_serializable(crew_output)
         
         # Track the final result
         tracker.log_activity(

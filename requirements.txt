@@ -3,6 +3,7 @@ crewai
 autogen
 Langchain
 langchain-community
+langchain-openai
 python-dotenv
 googlesearch-python
 openai
