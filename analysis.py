@@ -1,363 +1,289 @@
 # analysis.py
 """
-Core CrewAI setup and task definitions for the Agentic Explorer.
-This module defines the agents and their interactions, creating the multi-agent system.
+Core data processing pipeline for RAG Showdown.
 """
 
-import os
-import json
 import logging
-from dotenv import load_dotenv
-from crewai import Crew, Agent, Task, Process
-from langchain_community.chat_models import ChatOpenAI
-from data.content import AGENT_DESCRIPTIONS, TASK_DESCRIPTIONS
-from agents.agent_tracker import AgentTracker
-from agents.boundary_detective import BoundaryDetectiveAgent
-from agents.document_agent import DocumentAnalyzerAgent
-from agents.summarization_agent import SummarizationAgent
-from judge.analysis_judge import AnalysisJudgeAgent
+import time
+import json
+from typing import Dict, Any, List, Optional
 
-# Load environment variables
-load_dotenv()
+# Import processors
+from processors.document import DocumentAnalyzer
+from processors.chunking import ChunkingProcessor
+from processors.embedding import EmbeddingProcessor
+from processors.index import IndexProcessor
+from processors.retrieval import RetrievalProcessor
+from processors.synthesis import SynthesisProcessor
+from utils.openai_client import OpenAIClient
+from config import Config
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def make_serializable(obj):
-    """
-    Convert a complex object to a JSON serializable format.
+class AnalysisPipeline:
+    """Core analysis pipeline for RAG Showdown."""
     
-    Args:
-        obj: Any Python object
+    def __init__(self):
+        """Initialize the analysis pipeline with all processors."""
+        self.document_analyzer = DocumentAnalyzer()
+        self.chunking_processor = ChunkingProcessor()
+        self.embedding_processor = EmbeddingProcessor()
+        self.index_processor = IndexProcessor()
+        self.retrieval_processor = RetrievalProcessor()
+        self.synthesis_processor = SynthesisProcessor()
+        self.openai_client = OpenAIClient()
         
-    Returns:
-        JSON serializable version of the object
-    """
-    if hasattr(obj, 'dict') and callable(getattr(obj, 'dict')):
-        # If object has a dict() method (like Pydantic models)
-        return make_serializable(obj.dict())
-    elif hasattr(obj, '__dict__'):
-        # For general objects with __dict__
-        result = {}
-        for key, value in obj.__dict__.items():
-            if not key.startswith('_'):  # Skip private attributes
-                result[key] = make_serializable(value)
-        return result
-    elif isinstance(obj, dict):
-        # Process dictionaries recursively
-        return {key: make_serializable(value) for key, value in obj.items()}
-    elif isinstance(obj, list):
-        # Process lists recursively
-        return [make_serializable(item) for item in obj]
-    elif isinstance(obj, (str, int, float, bool, type(None))):
-        # Basic types are already serializable
-        return obj
-    else:
-        # For other types, convert to string
-        return str(obj)
-
-def create_tracked_crew(document_text, session_name=None, output_dir="output"):
-    """
-    Create and return a CrewAI crew with activity tracking for educational purposes.
+        logger.info("Initialized RAG Showdown analysis pipeline")
     
-    Args:
-        document_text (str): The text to be analyzed
-        session_name (str, optional): Name for the tracking session
-        output_dir (str, optional): Directory to save tracking outputs
+    def analyze_document(self, document_text: str) -> Dict[str, Any]:
+        """
+        Analyze document text and compute basic metrics.
         
-    Returns:
-        tuple: (crew, tracker, agent_dict) - The crew, tracker instance, and dictionary of agents
-    """
-    # Initialize tracking
-    tracker = AgentTracker(session_name=session_name or "document_analysis_session")
-    
-    # Create directory for outputs if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
-    
-    logger.info("Creating agents with activity tracking...")
-    
-    # Initialize our local agents with tracking - using thin wrappers
-    boundary_agent = BoundaryDetectiveAgent()
-    boundary_agent.set_tracker(tracker)
-    
-    document_agent = DocumentAnalyzerAgent()
-    document_agent.set_tracker(tracker)
-    
-    summarization_agent = SummarizationAgent()
-    summarization_agent.set_tracker(tracker)
-    
-    judge_agent = AnalysisJudgeAgent()
-    judge_agent.set_tracker(tracker)
-    
-    # Initialize the LLM for CrewAI using langchain - shared instance
-    llm = ChatOpenAI(
-        model="gpt-3.5-turbo",
-        temperature=0.7,
-        verbose=True
-    )
-    
-    # Record initial state before creating CrewAI agents
-    tracker.log_activity(
-        "system",
-        "initialize_agents",
-        {"document_length": len(document_text)},
-        {
-            "boundary_agent": boundary_agent.name,
-            "document_agent": document_agent.name,
-            "summarization_agent": summarization_agent.name,
-            "judge_agent": judge_agent.name
-        },
-        reasoning=["Initialized all agents with tracking capabilities"]
-    )
-    
-    # Create CrewAI agents with shared langchain LLM
-    crew_boundary_agent = Agent(
-        role=boundary_agent.role,
-        goal=boundary_agent.goal,
-        backstory=boundary_agent.backstory,
-        verbose=True,
-        allow_delegation=False,
-        llm=llm
-    )
-    
-    crew_document_agent = Agent(
-        role=document_agent.role,
-        goal=document_agent.goal,
-        backstory=document_agent.backstory,
-        verbose=True,
-        allow_delegation=False,
-        llm=llm
-    )
-    
-    crew_summarization_agent = Agent(
-        role=summarization_agent.role,
-        goal=summarization_agent.goal,
-        backstory=summarization_agent.backstory,
-        verbose=True,
-        allow_delegation=False,
-        llm=llm
-    )
-    
-    crew_judge_agent = Agent(
-        role=judge_agent.role,
-        goal=judge_agent.goal,
-        backstory=judge_agent.backstory,
-        verbose=True,
-        allow_delegation=False,
-        llm=llm
-    )
-    
-    # Map the CrewAI agents to our tracked agents
-    agent_map = {
-        "boundary_detective": (crew_boundary_agent, boundary_agent),
-        "document_analyzer": (crew_document_agent, document_agent),
-        "summarization_manager": (crew_summarization_agent, summarization_agent),
-        "analysis_judge": (crew_judge_agent, judge_agent)
-    }
-    
-    # Create tracking record of CrewAI agent creation
-    tracker.log_activity(
-        "system",
-        "create_crewai_agents",
-        {},
-        {"agent_count": len(agent_map)},
-        reasoning=["Created CrewAI agents that parallel our tracked agents"]
-    )
-    
-    # Create tasks (without modifying their execute method)
-    boundary_detection_task = Task(
-        description=TASK_DESCRIPTIONS["boundary_detection"],
-        agent=crew_boundary_agent,
-        expected_output="Structured analysis of document boundaries with positions and confidence levels"
-    )
-    
-    document_classification_task = Task(
-        description=TASK_DESCRIPTIONS["document_classification"],
-        agent=crew_boundary_agent,
-        expected_output="Classification of each document segment by type, company, and time period",
-        context=[boundary_detection_task]
-    )
-    
-    document_analysis_task = Task(
-        description=TASK_DESCRIPTIONS.get("document_analysis", 
-            "Analyze the document structure and metrics. Compute word counts, sentence counts, paragraph counts, " +
-            "and extract key entities. Identify patterns in the document's structure and organization. " +
-            "Provide a quantitative assessment of the document's characteristics."),
-        agent=crew_document_agent,
-        expected_output="Document metrics and structure analysis",
-        context=[boundary_detection_task, document_classification_task]
-    )
-    
-    summarization_task = Task(
-        description=TASK_DESCRIPTIONS.get("summarization", 
-            "Generate multiple summary approaches for the document: standard full-document summary, " +
-            "partition-based summaries that respect document boundaries, and entity-focused summaries. " +
-            "Compare these approaches and recommend which works best for this document type with explanation."),
-        agent=crew_summarization_agent,
-        expected_output="Multi-strategy summarization results with comparisons",
-        context=[boundary_detection_task, document_classification_task, document_analysis_task]
-    )
-    
-    synthesis_task = Task(
-        description=TASK_DESCRIPTIONS["synthesis"],
-        agent=crew_judge_agent,
-        expected_output="Comprehensive analysis with insights and recommendations",
-        context=[boundary_detection_task, document_classification_task, 
-                 document_analysis_task, summarization_task]
-    )
-    
-    # Log task creation
-    tracker.log_activity(
-        "system",
-        "create_tasks",
-        {},
-        {
-            "task_count": 5,
-            "tasks": [
-                "boundary_detection", 
-                "document_classification", 
-                "document_analysis", 
-                "summarization", 
-                "synthesis"
-            ]
-        },
-        reasoning=["Created 5 tasks for the CrewAI agents to execute sequentially"]
-    )
-    
-    # Create crew
-    document_crew = Crew(
-        agents=[crew_boundary_agent, crew_document_agent, crew_summarization_agent, crew_judge_agent],
-        tasks=[boundary_detection_task, document_classification_task, 
-               document_analysis_task, summarization_task, synthesis_task],
-        verbose=True,
-        process=Process.sequential  # Start with sequential for easier debugging
-    )
-    
-    # Log crew creation
-    tracker.log_activity(
-        "system",
-        "create_crew",
-        {},
-        {"process_type": "sequential"},
-        reasoning=["Created CrewAI crew with sequential process flow for easier debugging"]
-    )
-    
-    return document_crew, tracker, agent_map
-
-def run_analysis_with_tracking(document_text, session_name=None, output_dir="output"):
-    """
-    Run document analysis with the multi-agent system and track all activities.
-    
-    Args:
-        document_text (str): The text to be analyzed
-        session_name (str, optional): Name for the tracking session
-        output_dir (str, optional): Directory to save tracking outputs
+        Args:
+            document_text: Document text to analyze
+            
+        Returns:
+            Dict with document metrics and analysis
+        """
+        logger.info(f"Analyzing document ({len(document_text)} chars)")
+        start_time = time.time()
         
-    Returns:
-        dict: Results and tracking information
-    """
-    logger.info("Starting multi-agent document analysis with tracking")
-    
-    # Create crew with tracking
-    document_crew, tracker, agent_map = create_tracked_crew(
-        document_text, 
-        session_name=session_name,
-        output_dir=output_dir
-    )
-    
-    # Start timing
-    import time
-    start_time = time.time()
-    
-    # Log analysis start
-    tracker.log_activity(
-        "system",
-        "start_analysis",
-        {"document_length": len(document_text)},
-        {"start_time": start_time},
-        reasoning=["Beginning multi-agent analysis of document"]
-    )
-    
-    # Run the crew
-    try:
-        crew_output = document_crew.kickoff(inputs={"document": document_text})
-        # Convert to serializable format
-        crew_result = make_serializable(crew_output)
+        # Compute basic metrics
+        metrics = self.document_analyzer.compute_basic_metrics(document_text)
         
-        # Track the final result
-        tracker.log_activity(
-            "system",
-            "complete_analysis",
-            {"document_length": len(document_text)},
-            {"completion_status": "success"},
-            reasoning=["Multi-agent analysis completed successfully"]
-        )
+        # Detect document boundaries
+        boundaries = self.document_analyzer.analyze_document_boundaries(document_text)
         
-    except Exception as e:
-        logger.error(f"Error in crew execution: {e}")
-        tracker.log_activity(
-            "system",
-            "analysis_error",
-            {"document_length": len(document_text)},
-            {"error": str(e)},
-            reasoning=["Error occurred during multi-agent analysis"]
-        )
-        crew_result = {"error": str(e)}
-    
-    # End timing
-    total_time = time.time() - start_time
-    
-    # Log completion information
-    tracker.log_activity(
-        "system",
-        "analysis_statistics",
-        {},
-        {
-            "total_time": total_time,
-            "activity_count": len(tracker.activities)
-        },
-        reasoning=["Calculated final statistics for the analysis run"]
-    )
-    
-    # Generate tracking outputs
-    json_output_path = os.path.join(output_dir, f"{tracker.session_name}_tracking.json")
-    tracker.export_json(json_output_path)
-    
-    markdown_output = tracker.generate_markdown()
-    markdown_output_path = os.path.join(output_dir, f"{tracker.session_name}_report.md")
-    with open(markdown_output_path, "w") as f:
-        f.write(markdown_output)
-    
-    # Create a combined result
-    result = {
-        "crew_result": crew_result,
-        "tracking": {
-            "session_name": tracker.session_name,
-            "json_output": json_output_path,
-            "markdown_report": markdown_output_path,
-            "total_time": total_time,
-            "activity_count": len(tracker.activities)
+        # Generate summary
+        summary = self.document_analyzer.generate_summary(document_text)
+        
+        processing_time = time.time() - start_time
+        
+        return {
+            "document_length": len(document_text),
+            "metrics": metrics,
+            "boundaries": boundaries,
+            "summary": summary,
+            "processing_time": processing_time
         }
-    }
     
-    logger.info(f"Analysis complete in {total_time:.2f} seconds")
-    logger.info(f"Tracking information saved to {output_dir}")
+    def compare_chunking_strategies(self, document_text: str) -> Dict[str, Any]:
+        """
+        Compare different chunking strategies on the document.
+        
+        Args:
+            document_text: Document text to chunk
+            
+        Returns:
+            Dict with chunking comparison results
+        """
+        logger.info(f"Comparing chunking strategies for document ({len(document_text)} chars)")
+        start_time = time.time()
+        
+        # Run chunking comparison
+        comparison = self.chunking_processor.compare_chunking_strategies(
+            text=document_text,
+            strategies=[
+                {"name": "Traditional Fixed-Size", "strategy": "fixed_size"},
+                {"name": "Boundary-Aware", "strategy": "boundary_aware"},
+                {"name": "Semantic", "strategy": "semantic"}
+            ]
+        )
+        
+        processing_time = time.time() - start_time
+        
+        return {
+            "chunking_comparison": comparison,
+            "processing_time": processing_time
+        }
     
-    return result
-
-# For direct testing
-if __name__ == "__main__":
-    # Test with a simple document
-    test_text = """
-    Apple Inc. reported strong earnings for Q3 2023, with revenue reaching $81.8 billion.
-    CEO Tim Cook highlighted the growth in Services, which set another all-time record.
+    def build_retrieval_indices(self, 
+                              document_text: str, 
+                              chunking_strategies: List[str] = None) -> Dict[str, Any]:
+        """
+        Build retrieval indices for different chunking strategies.
+        
+        Args:
+            document_text: Document text to process
+            chunking_strategies: List of chunking strategies to use
+            
+        Returns:
+            Dict with index information for each strategy
+        """
+        chunking_strategies = chunking_strategies or ["fixed_size", "boundary_aware"]
+        logger.info(f"Building indices for {len(chunking_strategies)} chunking strategies")
+        
+        indices = {}
+        
+        for strategy in chunking_strategies:
+            start_time = time.time()
+            
+            # 1. Chunk document
+            chunking_result = self.chunking_processor.chunk_document(
+                text=document_text,
+                strategy=strategy
+            )
+            chunks = chunking_result.get("chunks", [])
+            
+            # 2. Generate embeddings
+            embedded_chunks = self.embedding_processor.embed_chunks(chunks)
+            
+            # 3. Build index
+            # Create a separate collection for each strategy
+            index = IndexProcessor(collection_name=f"rag_showdown_{strategy}")
+            index_ids = index.build_index_from_embeddings(embedded_chunks)
+            
+            processing_time = time.time() - start_time
+            
+            indices[strategy] = {
+                "strategy": strategy,
+                "chunk_count": len(chunks),
+                "index_ids": index_ids,
+                "processing_time": processing_time,
+                "index_processor": index  # Keep reference to the index
+            }
+        
+        return indices
     
-    Meanwhile, Microsoft Corporation announced its Q2 2023 results on January 24, 2023,
-    with cloud revenue growing 22% year-over-year to $27.1 billion.
+    def compare_retrieval_methods(self, 
+                                query: str, 
+                                indices: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Compare different retrieval methods using the built indices.
+        
+        Args:
+            query: Query to test
+            indices: Dict of indices from build_retrieval_indices
+            
+        Returns:
+            Dict with retrieval comparison results
+        """
+        logger.info(f"Comparing retrieval methods for query: '{query}'")
+        
+        retrieval_results = {}
+        
+        # For each chunking strategy's index
+        for strategy, index_info in indices.items():
+            index_processor = index_info.get("index_processor")
+            if not index_processor:
+                continue
+                
+            # Create retrieval processor with this index
+            retrieval_processor = RetrievalProcessor(
+                index_processor=index_processor
+            )
+            
+            # Compare retrieval methods
+            comparison = retrieval_processor.compare_retrieval_methods(
+                query=query,
+                methods=["vector", "entity", "context", "hybrid"]
+            )
+            
+            retrieval_results[strategy] = comparison
+        
+        return retrieval_results
     
-    Both companies discussed AI investments during their earnings calls.
-    """
+    def compare_synthesis_methods(self, 
+                                query: str, 
+                                retrieval_results: Dict[str, Any],
+                                strategy: str = "boundary_aware") -> Dict[str, Any]:
+        """
+        Compare different synthesis methods using retrieval results.
+        
+        Args:
+            query: Original query
+            retrieval_results: Results from compare_retrieval_methods
+            strategy: Which chunking strategy's results to use
+            
+        Returns:
+            Dict with synthesis comparison results
+        """
+        logger.info(f"Comparing synthesis methods for query: '{query}'")
+        
+        # Get retrieved chunks from the hybrid method for the selected strategy
+        strategy_results = retrieval_results.get(strategy, {})
+        method_results = strategy_results.get("method_results", {})
+        hybrid_retrieval = method_results.get("hybrid", {})
+        context_chunks = hybrid_retrieval.get("results", [])
+        
+        if not context_chunks:
+            logger.warning(f"No context chunks found for strategy {strategy}")
+            return {"error": "No context chunks available for synthesis comparison"}
+        
+        # Compare synthesis methods
+        synthesis_comparison = self.synthesis_processor.compare_synthesis_methods(
+            query=query,
+            context_chunks=context_chunks,
+            methods=["single_prompt", "entity_focused", "multi_agent"]
+        )
+        
+        # Generate educational insights
+        educational_insights = self.synthesis_processor.generate_educational_insights(
+            synthesis_comparison
+        )
+        
+        return {
+            "synthesis_comparison": synthesis_comparison,
+            "educational_insights": educational_insights
+        }
     
-    result = run_analysis_with_tracking(test_text, session_name="test_analysis")
-    print(json.dumps(result, indent=2))
+    def run_complete_analysis(self, 
+                            document_text: str, 
+                            query: str = None) -> Dict[str, Any]:
+        """
+        Run a complete analysis pipeline.
+        
+        Args:
+            document_text: Document text to analyze
+            query: Query to test retrieval and synthesis (generated if None)
+            
+        Returns:
+            Dict with all analysis results
+        """
+        logger.info(f"Running complete RAG Showdown analysis pipeline")
+        start_time = time.time()
+        
+        results = {
+            "document_length": len(document_text),
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
+        # 1. Document analysis
+        document_analysis = self.analyze_document(document_text)
+        results["document_analysis"] = document_analysis
+        
+        # 2. Chunking comparison
+        chunking_results = self.compare_chunking_strategies(document_text)
+        results["chunking_results"] = chunking_results
+        
+        # 3. Build indices
+        indices = self.build_retrieval_indices(
+            document_text, 
+            chunking_strategies=["fixed_size", "boundary_aware"]
+        )
+        results["indices"] = {k: {key: v[key] for key in v if key != "index_processor"} 
+                             for k, v in indices.items()}
+        
+        # Generate query if not provided
+        if not query:
+            summary = document_analysis.get("summary", "")
+            query = f"What are the main topics discussed in this document: {summary[:100]}...?"
+            
+        results["query"] = query
+        
+        # 4. Retrieval comparison
+        retrieval_results = self.compare_retrieval_methods(query, indices)
+        results["retrieval_results"] = retrieval_results
+        
+        # 5. Synthesis comparison
+        synthesis_results = self.compare_synthesis_methods(query, retrieval_results)
+        results["synthesis_results"] = synthesis_results
+        
+        # Calculate total processing time
+        results["total_processing_time"] = time.time() - start_time
+        
+        logger.info(f"Complete analysis pipeline finished in {results['total_processing_time']:.2f}s")
+        
+        return results

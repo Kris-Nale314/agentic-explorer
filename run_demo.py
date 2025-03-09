@@ -1,150 +1,103 @@
-# run_demo.py
 """
-Demonstration script for the Agentic Explorer project.
+CLI runner for the RAG Showdown.
 
-This script showcases the multi-agent document analysis system
-and provides an educational view of what's happening "under the hood"
-of AI document processing.
+Provides a command-line interface for running the RAG comparison.
 """
 
 import os
 import sys
-import json
-import logging
 import argparse
-from datetime import datetime
-from dotenv import load_dotenv
+import logging
+from typing import Dict, Any
 
-# Load environment variables
-load_dotenv()
+from orchestration import run_rag_showdown, create_demo_session
+from config import Config
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler("rag_showdown.log")
+    ]
+)
 logger = logging.getLogger(__name__)
 
-from config import Config
-from orchestration import create_demo_session, load_test_document
-from data.content import AGENT_DESCRIPTIONS
-
-def print_section(title, underline_char='='):
-    """Print a section title with underlines."""
-    print(f"\n{title}")
-    print(underline_char * len(title))
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="RAG Showdown: Traditional vs. Agentic RAG")
+    
+    parser.add_argument("--document", "-d", type=str, 
+                        help="Path to document file (default: uses Config.TEST_DATA_FILE)")
+    parser.add_argument("--query", "-q", type=str, 
+                        help="Query to test retrieval and synthesis (default: auto-generated)")
+    parser.add_argument("--output", "-o", type=str, default=Config.OUTPUT_DIR,
+                        help=f"Output directory (default: {Config.OUTPUT_DIR})")
+    parser.add_argument("--demo", action="store_true",
+                        help="Run in demo mode with predefined settings")
+    
+    return parser.parse_args()
 
 def main():
-    """Run the Agentic Explorer demonstration."""
-    print_section("🚀 Agentic Explorer Demonstration", "=")
-    print("Demystifying multi-agent AI by showing what's happening under the hood")
+    """Main entry point for the script."""
+    args = parse_arguments()
     
-    # Parse command-line arguments
-    parser = argparse.ArgumentParser(description="Run Agentic Explorer demonstration")
-    parser.add_argument('--document', type=str, help="Path to document file")
-    parser.add_argument('--type', type=str, default="multi_agent", 
-                        choices=["basic", "summary", "boundary", "multi_summary", "comprehensive", "multi_agent"],
-                        help="Type of analysis to run")
-    parser.add_argument('--output', type=str, help="Directory for output files")
-    
-    args = parser.parse_args()
-    
-    # Set document path
-    document_path = args.document or Config.TEST_DATA_FILE
-    if not os.path.exists(document_path):
-        print(f"Document file not found: {document_path}")
-        print("Please provide a valid document path with --document")
-        return
-    
-    # Set output directory
-    output_dir = args.output or Config.OUTPUT_DIR
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Set demo type
-    demo_type = args.type
-    
-    print_section("Demo Configuration", "-")
-    print(f"Document: {document_path}")
-    print(f"Analysis Type: {demo_type}")
-    print(f"Output Directory: {output_dir}")
-    
-    # Preview document
-    try:
-        document_text = load_test_document(document_path)
-        word_count = len(document_text.split())
-        
-        print_section("Document Preview", "-")
-        print(f"Document length: {len(document_text)} characters, approximately {word_count} words")
-        print("First 300 characters:")
-        print(f"\n{document_text[:300]}...\n")
-    except Exception as e:
-        print(f"Error loading document: {e}")
-        return
-    
-    # Confirm before proceeding
-    proceed = input(f"Run {demo_type} analysis on this document? (y/n): ").lower() == 'y'
-    if not proceed:
-        print("Demo cancelled")
-        return
-    
-    # Run the demo
-    print_section(f"Running {demo_type.title()} Analysis", "-")
-    print("This may take a few minutes depending on document size and analysis type...")
+    print("\n=== RAG Showdown: Traditional vs. Agentic RAG ===\n")
     
     try:
-        session_info = create_demo_session(
-            document_path=document_path,
-            output_dir=output_dir,
-            demo_type=demo_type
-        )
-        
-        print_section("Analysis Complete!", "-")
-        print(f"Session name: {session_info['session_name']}")
-        
-        # Display appropriate results based on demo type
-        if demo_type == "multi_agent":
-            tracking_info = session_info['results'].get('tracking', {})
-            print(f"Agent tracking information:")
-            print(f"- Activity count: {tracking_info.get('activity_count', 'N/A')}")
-            print(f"- Total time: {tracking_info.get('total_time', 'N/A'):.2f} seconds")
-            print(f"- Markdown report: {tracking_info.get('markdown_report', 'N/A')}")
-            
-            # Try to extract key insights if available
-            crew_result = session_info['results'].get('crew_result', {})
-            if isinstance(crew_result, dict) and 'key_insights' in crew_result:
-                print_section("Key Insights", "-")
-                for i, insight in enumerate(crew_result['key_insights'], 1):
-                    print(f"{i}. {insight}")
+        if args.demo:
+            # Run demo mode
+            print("Running in demo mode with predefined settings...")
+            results = create_demo_session(
+                document_path=args.document,
+                output_dir=args.output,
+                query=args.query
+            )
         else:
-            if 'metrics' in session_info['results']:
-                metrics = session_info['results']['metrics']
-                print_section("Document Metrics", "-")
-                print(f"- Word count: {metrics.get('word_count', 'N/A')}")
-                print(f"- Sentence count: {metrics.get('sentence_count', 'N/A')}")
-                print(f"- Paragraph count: {metrics.get('paragraph_count', 'N/A')}")
+            # Run standard analysis
+            document_path = args.document or Config.TEST_DATA_FILE
+            print(f"Analyzing document: {document_path}")
             
-            if 'educational_materials' in session_info['results']:
-                edu_path = session_info['results']['educational_materials'].get('markdown_report', 'N/A')
-                print_section("Educational Materials", "-")
-                print(f"Educational report available at: {edu_path}")
-                
-                # Try to read and display a snippet of the educational materials
-                try:
-                    with open(edu_path, 'r') as f:
-                        edu_content = f.read()
-                        print_section("Educational Report Preview", "-")
-                        print(f"{edu_content[:500]}...\n")
-                except Exception as e:
-                    print(f"Could not read educational report: {e}")
+            if args.query:
+                print(f"Using query: {args.query}")
+            
+            results = run_rag_showdown(
+                file_path=document_path,
+                query=args.query,
+                output_dir=args.output
+            )
         
-        print_section("Next Steps", "-")
-        print("1. Review the generated reports in the output directory")
-        print("2. Explore how different analysis types process the same document")
-        print("3. Use these outputs to understand what's happening 'under the hood' of AI systems")
+        # Print summary
+        print("\nAnalysis complete!")
+        print(f"Total processing time: {results.get('total_processing_time', 0):.2f} seconds")
+        print(f"Results saved to: {results.get('report_file')}")
         
-        print_section("Thank You!", "=")
-        print("Agentic Explorer - Demystifying AI one document at a time.")
+        # Print interesting findings
+        if "document_analysis" in results and "metrics" in results["document_analysis"]:
+            metrics = results["document_analysis"]["metrics"]
+            print(f"\nDocument stats: {metrics.get('word_count', 'N/A')} words, "
+                 f"{metrics.get('sentence_count', 'N/A')} sentences")
+        
+        if "chunking_results" in results and "chunking_comparison" in results["chunking_results"]:
+            comparison = results["chunking_results"]["chunking_comparison"]
+            if "comparison" in comparison and "overall_ranking" in comparison["comparison"]:
+                top_strategy = comparison["comparison"]["overall_ranking"][0][0]
+                print(f"\nBest chunking strategy: {top_strategy}")
+        
+        if "synthesis_results" in results and "synthesis_comparison" in results["synthesis_results"]:
+            comparison = results["synthesis_results"]["synthesis_comparison"]
+            if "comparison" in comparison and "analysis" in comparison["comparison"]:
+                analysis = comparison["comparison"]["analysis"]
+                if "overall_best_method" in analysis:
+                    print(f"\nBest synthesis method: {analysis['overall_best_method']}")
+        
+        return 0
         
     except Exception as e:
-        print(f"Error running demo: {e}")
-        return
+        logger.error(f"Error running RAG Showdown: {e}", exc_info=True)
+        print(f"\nError: {e}")
+        return 1
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

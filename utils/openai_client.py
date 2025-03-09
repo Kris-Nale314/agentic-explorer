@@ -91,14 +91,69 @@ class OpenAIClient:
         """
         return len(text) // 4
 
-def get_openai_client(model="gpt-3.5-turbo"):
-    """
-    Get an instance of the OpenAI client.
-    
-    Args:
-        model (str, optional): Default model to use. Defaults to "gpt-3.5-turbo".
+    def get_openai_client(model="gpt-3.5-turbo"):
+        """
+        Get an instance of the OpenAI client.
         
-    Returns:
-        OpenAIClient: Configured client instance
-    """
-    return OpenAIClient(model=model)
+        Args:
+            model (str, optional): Default model to use. Defaults to "gpt-3.5-turbo".
+            
+        Returns:
+            OpenAIClient: Configured client instance
+        """
+        return OpenAIClient(model=model)
+
+    def estimate_token_count(self, text):
+        """
+        Estimate the number of tokens in a text.
+        This is a rough estimate: ~4 chars per token for English text.
+        
+        Args:
+            text (str): The text to estimate tokens for
+            
+        Returns:
+            int: Estimated token count
+        """
+        return len(text) // 4
+        
+    def get_embedding(self, text, model="text-embedding-ada-002"):
+        """
+        Generate an embedding for the given text.
+        
+        Args:
+            text (str): The text to generate an embedding for
+            model (str, optional): Embedding model to use. Defaults to "text-embedding-ada-002".
+            
+        Returns:
+            list: The embedding vector
+        """
+        try:
+            response = self.client.embeddings.create(
+                model=model,
+                input=text
+            )
+            return response.data[0].embedding
+        except Exception as e:
+            logger.error(f"Error generating embedding: {e}")
+            raise
+    
+    def get_embeddings(self, texts, model="text-embedding-ada-002"):
+        """
+        Generate embeddings for multiple texts.
+        
+        Args:
+            texts (list): List of texts to generate embeddings for
+            model (str, optional): Embedding model to use. Defaults to "text-embedding-ada-002".
+            
+        Returns:
+            list: List of embedding vectors
+        """
+        try:
+            response = self.client.embeddings.create(
+                model=model,
+                input=texts
+            )
+            return [item.embedding for item in response.data]
+        except Exception as e:
+            logger.error(f"Error generating embeddings: {e}")
+            raise

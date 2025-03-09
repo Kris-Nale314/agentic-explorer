@@ -1,4 +1,4 @@
-# processors/document_analyzer.py
+# processors/document.py
 """
 Document analyzer for computing metrics and detecting document structure.
 """
@@ -7,7 +7,7 @@ import re
 import nltk
 import logging
 from collections import Counter
-from utils.openai_client import get_openai_client
+from utils.openai_client import OpenAIClient
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -27,7 +27,7 @@ class DocumentAnalyzer:
     
     def __init__(self):
         """Initialize the DocumentAnalyzer."""
-        self.openai_client = get_openai_client()
+        self.openai_client = OpenAIClient()
     
     def compute_basic_metrics(self, text):
         """
