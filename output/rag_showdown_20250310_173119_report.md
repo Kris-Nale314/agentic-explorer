@@ -1,8 +1,8 @@
 # RAG Showdown Analysis Report
 
-Session ID: rag_showdown_20250309_193300  
+Session ID: rag_showdown_20250310_173119  
 Document length: 9265 characters  
-Processing time: 52.90 seconds  
+Processing time: 34.77 seconds  
 
 ## Document Analysis
 
@@ -15,18 +15,14 @@ Processing time: 52.90 seconds
 
 ### Document Boundaries
 
-Boundary detection confidence: 9
+Boundary detection confidence: N/A
 
-Detected 2 potential document boundaries:
-
-- Boundary 1: Unknown at position 779
-- Boundary 2: Unknown at position 1656
 ## Chunking Strategy Comparison
 
 ### Strategy Ranking
 
-- **Boundary-Aware**: 0.552
-- **Semantic**: 0.457
+- **Boundary-Aware**: 0.521
+- **Semantic**: 0.478
 - **Traditional Fixed-Size**: 0.008
 
 ### Metrics Comparison
@@ -34,8 +30,8 @@ Detected 2 potential document boundaries:
 | Strategy | Chunks | Avg Size | Boundary Score | Sentence Score |
 |----------|--------|----------|----------------|---------------|
 | Traditional Fixed-Size | 213 | 149.1 | 0.00 | 0.03 |
-| Boundary-Aware | 11 | 819.6 | 0.78 | 0.03 |
-| Semantic | 11 | 819.4 | 0.64 | 0.04 |
+| Boundary-Aware | 11 | 819.0 | 0.73 | 0.04 |
+| Semantic | 11 | 808.0 | 0.67 | 0.04 |
 
 ## Retrieval Method Comparison
 
@@ -46,10 +42,10 @@ Most unique results: **vector**
 
 #### Retrieval Speed
 
-- vector: 0.511s
-- entity: 1.978s
+- vector: 0.412s
+- entity: 1.972s
 - context: 0.001s
-- hybrid: 0.011s
+- hybrid: 0.006s
 
 ### Retrieval with boundary_aware chunking
 
@@ -58,10 +54,10 @@ Most unique results: **vector**
 
 #### Retrieval Speed
 
-- vector: 0.242s
-- entity: 2.066s
+- vector: 0.248s
+- entity: 1.270s
 - context: 0.001s
-- hybrid: 0.009s
+- hybrid: 0.004s
 
 ## Synthesis Method Comparison
 

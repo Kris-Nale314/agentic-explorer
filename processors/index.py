@@ -36,6 +36,8 @@ class IndexEntry:
     embedding: List[float]
     metadata: Dict[str, Any] = field(default_factory=dict)
     
+
+    
     def to_dict(self) -> Dict[str, Any]:
         """Convert entry to dictionary representation."""
         return {
@@ -62,10 +64,10 @@ class IndexProcessor:
     """
     
     def __init__(self, 
-                 persistent_dir: str = "data/index",
-                 collection_name: str = "document_chunks",
-                 embedding_dimension: int = 1536,
-                 use_chroma: bool = True):
+        persistent_dir: str = "data/index",
+        collection_name: str = "document_chunks",
+        embedding_dimension: int = 1536,
+        use_chroma: bool = True):
         """
         Initialize the index processor.
         
@@ -94,7 +96,7 @@ class IndexProcessor:
         else:
             self._init_file_based()
             
-        logger.info(f"Initialized IndexProcessor with backend: {'ChromaDB' if self.use_chroma else 'File-based'}")
+        logger.info(f"Initialized IndexProcessor with backend: {'ChromaDB' if self.use_chroma else 'File-based'}, collection: {collection_name}")
     
     def _init_chroma(self):
         """Initialize ChromaDB client and collection."""

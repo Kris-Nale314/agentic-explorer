@@ -1,0 +1,1066 @@
+{
+  "session_id": "rag_showdown_20250310_173119",
+  "document_length": 9265,
+  "document_insights": {
+    "basic_summary": {
+      "summary": "The text provides excerpts from conference calls of Dell Technologies Inc., Apple Inc., and Microsoft Corporation discussing their financial results for the fiscal year 2025. Key points include revenue and earnings performance, operational highlights, technology innovations, and forward-looking statements on future prospects and risks.",
+      "style": "concise",
+      "word_count": 44,
+      "processing_time": 1.0632193088531494,
+      "method": "basic_summary"
+    },
+    "entity_summary": {
+      "summary": "\n# Dell Technologies Inc.\n- **Key Executives:** Paul Frantz, Jeff Clarke, Yvonne McGill, Tyler Johnson\n- **Financial Performance (FY '25):**\n  - Revenue: $95.6 billion, up 8%\n  - Operating income: $8.5 billion\n  - EPS: $8.14, up 10%\n  - Cash flow: $4.5 billion\n- **Innovation:**\n  - Added five platforms to AI-optimized portfolio\n  - Supported oil architectures with PowerEdge\n\n# Apple Inc.\n- **Key Executives:** Tim Cook, Kevan Parekh, Suhasini Chandramouli\n- **Financial Performance (Q1 FY '25):**\n  - Revenue: $124.3 billion, up 4%\n  - EPS: $2.40, up 10%\n- **Achievements:**\n  - All-time revenue records across regions\n  - All-time revenue record in services\n  - Over 2.35 billion active devices\n  - Nearly $100 billion revenue from services business\n\n# Microsoft Corporation\n- **Key Executives:** Satya Nadella, Amy Hood, Alice Jolla, Keith Dolliver",
+      "entities": [
+        "Dell Technologies Inc.",
+        "Dell",
+        "Paul Frantz",
+        "Jeff Clarke",
+        "Yvonne McGill",
+        "Tyler Johnson",
+        "Apple Inc.",
+        "Tim Cook",
+        "Kevan Parekh",
+        "Suhasini Chandramouli"
+      ],
+      "entity_count": 10,
+      "processing_time": 4.003976821899414,
+      "method": "entity_focused_summary"
+    },
+    "temporal_summary": {
+      "summary": "**Fiscal Year 2025 Fourth Quarter Financial Results Conference Call for Dell Technologies Inc.**\n\n**Date:** 4 2025\n\n- **Event:** Dell Technologies Inc. holds its Fiscal Year 2025 Fourth Quarter Financial Results Conference Call.\n- **Key Points:** \n    - Revenue was $95.6 billion, up 8%.\n    - Operating income was $8.5 billion.\n    - Reduction of operating expenditures by 4%.\n    - Record EPS of $8.14, up 10%.\n    - Cash flow of $4.5 billion.\n    - Addition of five platforms to AI-optimized portfolio.\n\n**Q1 Fiscal Year 2025 Earnings Conference Call for Apple Inc.**\n\n**Date:** 1 2025\n\n- **Event:** Apple Inc. conducts its Q1 Fiscal Year 2025 Earnings Conference Call.\n- **Key Points:**\n    - Revenue of $124.3 billion for the December quarter, up 4%.\n    - All-time record EPS at $2.40, 10% higher year-over-year.\n    - All-time revenue records achieved across various regions.\n    - All-time revenue record in services business.\n    - Over 2.35 billion active devices in the installed base.\n    - Introduction of Apple Intelligence features for devices.\n\n**Fiscal Year 2025 Second Quarter Earnings Conference Call for Microsoft Corporation**\n\n**Date:** 2 2025\n\n- **Event:** Microsoft holds its Fiscal Year 2025 Second Quarter Earnings Conference Call.\n- **Key Points:**\n    - Presentation by Satya Nadella, Amy Hood, Alice Jolla, and Keith Dolliver.\n    - Discussion of non-GAAP financial measures and growth comparisons.\n    - Emphasis on constant currency growth rates.\n    - Forward-looking statements regarding future events and risks.\n    - Availability of prepared remarks and webcast recording post-call.",
+      "time_periods": [
+        "2025"
+      ],
+      "chronological_order": true,
+      "period_count": 1,
+      "processing_time": 4.304115056991577,
+      "method": "temporal_summary"
+    }
+  },
+  "document_analysis": {
+    "document_length": 9265,
+    "metrics": {
+      "word_count": 1504,
+      "sentence_count": 77,
+      "paragraph_count": 8,
+      "page_count": 3,
+      "estimated_token_count": 2316,
+      "most_common_words": [
+        [
+          "our",
+          31
+        ],
+        [
+          "we",
+          24
+        ],
+        [
+          "call",
+          22
+        ],
+        [
+          "are",
+          15
+        ],
+        [
+          "year",
+          14
+        ],
+        [
+          "today",
+          13
+        ],
+        [
+          "will",
+          11
+        ],
+        [
+          "s",
+          11
+        ],
+        [
+          "financial",
+          9
+        ],
+        [
+          "results",
+          9
+        ]
+      ]
+    },
+    "boundaries": {
+      "raw_analysis": "```json\n{\n    \"boundaries\": [\n        {\n            \"position\": 1479,\n            \"context\": \"Now, moving on to other market information...\",\n            \"confidence\": 9\n        },\n        {\n            \"position\": 3122,\n            \"context\": \"Now, moving on to other market information...\",\n            \"confidence\": 9\n        }\n    ],\n    \"document_types\": [\n        \"Transcript - Dell Technologies Inc. (DELL) - 4 2025\",\n        \"Transcript - Apple Inc. (AAPL) - 1 2025\",\n        \"Transcript - Microsoft Corporation (MSFT) - 2 2025\"\n    ],\n    \"entities\": {\n        \"Dell Technologies Inc.\": \"DELL\",\n        \"Apple Inc.\": \"AAPL\",\n        \"Microsoft Corporation\": \"MSFT\"\n    },\n    \"time_periods\": {\n        \"Dell Technologies Inc. (DELL) - 4 2025\": \"Fiscal Year 2025 Fourth Quarter\",\n        \"Apple Inc. (AAPL) - 1 2025\": \"Q1 Fiscal Year 2025\",\n        \"Microsoft Corporation (MSFT) - 2 2025\": \"Fiscal Year 2025 Second Quarter\"\n    },\n    \"confidence_score\": 9\n}\n```\n"
+    },
+    "summary": "The text provides excerpts from conference calls for Dell Technologies Inc., Apple Inc., and Microsoft Corporation for their fiscal year 2025 financial results. Each company's representative discusses their revenue, operating income, earnings per share, and other key financial metrics, along with their achievements and innovations during the year. Forward-looking statements are also mentioned, along with risks and uncertainties. The calls emphasize the companies' performance, growth, and strategic initiatives in the technology market.",
+    "processing_time": 4.734341144561768,
+    "start_time": 1741642279.713408
+  },
+  "chunking_results": {
+    "chunking_comparison": {
+      "document_length": 9265,
+      "strategy_results": {
+        "Traditional Fixed-Size": {
+          "strategy": "fixed_size",
+          "document_length": 9265,
+          "boundaries": [
+            "Boundary(58, paragraph, conf=0.80)",
+            "Boundary(1100, entity_change, conf=0.90)",
+            "Boundary(2400, topic_shift, conf=0.80)",
+            "Boundary(3060, paragraph, conf=0.80)",
+            "Boundary(3107, paragraph, conf=0.80)",
+            "Boundary(3155, paragraph, conf=0.80)",
+            "Boundary(4000, temporal_shift, conf=0.70)",
+            "Boundary(6157, paragraph, conf=0.80)",
+            "Boundary(6204, paragraph, conf=0.80)",
+            "Boundary(6263, paragraph, conf=0.80)"
+          ],
+          "chunks": [
+            "Chunk(0:1000, 1000 chars)",
+            "Chunk(800:1800, 1000 chars)",
+            "Chunk(1600:2599, 999 chars)",
+            "Chunk(2399:3365, 966 chars)",
+            "Chunk(3165:4055, 890 chars)",
+            "Chunk(3855:4800, 945 chars)",
+            "Chunk(4600:5563, 963 chars)",
+            "Chunk(5363:6107, 744 chars)",
+            "Chunk(5907:6754, 847 chars)",
+            "Chunk(6554:7455, 901 chars)",
+            "Chunk(7255:8255, 1000 chars)",
+            "Chunk(8055:8900, 845 chars)",
+            "Chunk(8700:9265, 565 chars)",
+            "Chunk(9065:9265, 200 chars)",
+            "Chunk(9066:9265, 199 chars)",
+            "Chunk(9067:9265, 198 chars)",
+            "Chunk(9068:9265, 197 chars)",
+            "Chunk(9069:9265, 196 chars)",
+            "Chunk(9070:9265, 195 chars)",
+            "Chunk(9071:9265, 194 chars)",
+            "Chunk(9072:9265, 193 chars)",
+            "Chunk(9073:9265, 192 chars)",
+            "Chunk(9074:9265, 191 chars)",
+            "Chunk(9075:9265, 190 chars)",
+            "Chunk(9076:9265, 189 chars)",
+            "Chunk(9077:9265, 188 chars)",
+            "Chunk(9078:9265, 187 chars)",
+            "Chunk(9079:9265, 186 chars)",
+            "Chunk(9080:9265, 185 chars)",
+            "Chunk(9081:9265, 184 chars)",
+            "Chunk(9082:9265, 183 chars)",
+            "Chunk(9083:9265, 182 chars)",
+            "Chunk(9084:9265, 181 chars)",
+            "Chunk(9085:9265, 180 chars)",
+            "Chunk(9086:9265, 179 chars)",
+            "Chunk(9087:9265, 178 chars)",
+            "Chunk(9088:9265, 177 chars)",
+            "Chunk(9089:9265, 176 chars)",
+            "Chunk(9090:9265, 175 chars)",
+            "Chunk(9091:9265, 174 chars)",
+            "Chunk(9092:9265, 173 chars)",
+            "Chunk(9093:9265, 172 chars)",
+            "Chunk(9094:9265, 171 chars)",
+            "Chunk(9095:9265, 170 chars)",
+            "Chunk(9096:9265, 169 chars)",
+            "Chunk(9097:9265, 168 chars)",
+            "Chunk(9098:9265, 167 chars)",
+            "Chunk(9099:9265, 166 chars)",
+            "Chunk(9100:9265, 165 chars)",
+            "Chunk(9101:9265, 164 chars)",
+            "Chunk(9102:9265, 163 chars)",
+            "Chunk(9103:9265, 162 chars)",
+            "Chunk(9104:9265, 161 chars)",
+            "Chunk(9105:9265, 160 chars)",
+            "Chunk(9106:9265, 159 chars)",
+            "Chunk(9107:9265, 158 chars)",
+            "Chunk(9108:9265, 157 chars)",
+            "Chunk(9109:9265, 156 chars)",
+            "Chunk(9110:9265, 155 chars)",
+            "Chunk(9111:9265, 154 chars)",
+            "Chunk(9112:9265, 153 chars)",
+            "Chunk(9113:9265, 152 chars)",
+            "Chunk(9114:9265, 151 chars)",
+            "Chunk(9115:9265, 150 chars)",
+            "Chunk(9116:9265, 149 chars)",
+            "Chunk(9117:9265, 148 chars)",
+            "Chunk(9118:9265, 147 chars)",
+            "Chunk(9119:9265, 146 chars)",
+            "Chunk(9120:9265, 145 chars)",
+            "Chunk(9121:9265, 144 chars)",
+            "Chunk(9122:9265, 143 chars)",
+            "Chunk(9123:9265, 142 chars)",
+            "Chunk(9124:9265, 141 chars)",
+            "Chunk(9125:9265, 140 chars)",
+            "Chunk(9126:9265, 139 chars)",
+            "Chunk(9127:9265, 138 chars)",
+            "Chunk(9128:9265, 137 chars)",
+            "Chunk(9129:9265, 136 chars)",
+            "Chunk(9130:9265, 135 chars)",
+            "Chunk(9131:9265, 134 chars)",
+            "Chunk(9132:9265, 133 chars)",
+            "Chunk(9133:9265, 132 chars)",
+            "Chunk(9134:9265, 131 chars)",
+            "Chunk(9135:9265, 130 chars)",
+            "Chunk(9136:9265, 129 chars)",
+            "Chunk(9137:9265, 128 chars)",
+            "Chunk(9138:9265, 127 chars)",
+            "Chunk(9139:9265, 126 chars)",
+            "Chunk(9140:9265, 125 chars)",
+            "Chunk(9141:9265, 124 chars)",
+            "Chunk(9142:9265, 123 chars)",
+            "Chunk(9143:9265, 122 chars)",
+            "Chunk(9144:9265, 121 chars)",
+            "Chunk(9145:9265, 120 chars)",
+            "Chunk(9146:9265, 119 chars)",
+            "Chunk(9147:9265, 118 chars)",
+            "Chunk(9148:9265, 117 chars)",
+            "Chunk(9149:9265, 116 chars)",
+            "Chunk(9150:9265, 115 chars)",
+            "Chunk(9151:9265, 114 chars)",
+            "Chunk(9152:9265, 113 chars)",
+            "Chunk(9153:9265, 112 chars)",
+            "Chunk(9154:9265, 111 chars)",
+            "Chunk(9155:9265, 110 chars)",
+            "Chunk(9156:9265, 109 chars)",
+            "Chunk(9157:9265, 108 chars)",
+            "Chunk(9158:9265, 107 chars)",
+            "Chunk(9159:9265, 106 chars)",
+            "Chunk(9160:9265, 105 chars)",
+            "Chunk(9161:9265, 104 chars)",
+            "Chunk(9162:9265, 103 chars)",
+            "Chunk(9163:9265, 102 chars)",
+            "Chunk(9164:9265, 101 chars)",
+            "Chunk(9165:9265, 100 chars)",
+            "Chunk(9166:9265, 99 chars)",
+            "Chunk(9167:9265, 98 chars)",
+            "Chunk(9168:9265, 97 chars)",
+            "Chunk(9169:9265, 96 chars)",
+            "Chunk(9170:9265, 95 chars)",
+            "Chunk(9171:9265, 94 chars)",
+            "Chunk(9172:9265, 93 chars)",
+            "Chunk(9173:9265, 92 chars)",
+            "Chunk(9174:9265, 91 chars)",
+            "Chunk(9175:9265, 90 chars)",
+            "Chunk(9176:9265, 89 chars)",
+            "Chunk(9177:9265, 88 chars)",
+            "Chunk(9178:9265, 87 chars)",
+            "Chunk(9179:9265, 86 chars)",
+            "Chunk(9180:9265, 85 chars)",
+            "Chunk(9181:9265, 84 chars)",
+            "Chunk(9182:9265, 83 chars)",
+            "Chunk(9183:9265, 82 chars)",
+            "Chunk(9184:9265, 81 chars)",
+            "Chunk(9185:9265, 80 chars)",
+            "Chunk(9186:9265, 79 chars)",
+            "Chunk(9187:9265, 78 chars)",
+            "Chunk(9188:9265, 77 chars)",
+            "Chunk(9189:9265, 76 chars)",
+            "Chunk(9190:9265, 75 chars)",
+            "Chunk(9191:9265, 74 chars)",
+            "Chunk(9192:9265, 73 chars)",
+            "Chunk(9193:9265, 72 chars)",
+            "Chunk(9194:9265, 71 chars)",
+            "Chunk(9195:9265, 70 chars)",
+            "Chunk(9196:9265, 69 chars)",
+            "Chunk(9197:9265, 68 chars)",
+            "Chunk(9198:9265, 67 chars)",
+            "Chunk(9199:9265, 66 chars)",
+            "Chunk(9200:9265, 65 chars)",
+            "Chunk(9201:9265, 64 chars)",
+            "Chunk(9202:9265, 63 chars)",
+            "Chunk(9203:9265, 62 chars)",
+            "Chunk(9204:9265, 61 chars)",
+            "Chunk(9205:9265, 60 chars)",
+            "Chunk(9206:9265, 59 chars)",
+            "Chunk(9207:9265, 58 chars)",
+            "Chunk(9208:9265, 57 chars)",
+            "Chunk(9209:9265, 56 chars)",
+            "Chunk(9210:9265, 55 chars)",
+            "Chunk(9211:9265, 54 chars)",
+            "Chunk(9212:9265, 53 chars)",
+            "Chunk(9213:9265, 52 chars)",
+            "Chunk(9214:9265, 51 chars)",
+            "Chunk(9215:9265, 50 chars)",
+            "Chunk(9216:9265, 49 chars)",
+            "Chunk(9217:9265, 48 chars)",
+            "Chunk(9218:9265, 47 chars)",
+            "Chunk(9219:9265, 46 chars)",
+            "Chunk(9220:9265, 45 chars)",
+            "Chunk(9221:9265, 44 chars)",
+            "Chunk(9222:9265, 43 chars)",
+            "Chunk(9223:9265, 42 chars)",
+            "Chunk(9224:9265, 41 chars)",
+            "Chunk(9225:9265, 40 chars)",
+            "Chunk(9226:9265, 39 chars)",
+            "Chunk(9227:9265, 38 chars)",
+            "Chunk(9228:9265, 37 chars)",
+            "Chunk(9229:9265, 36 chars)",
+            "Chunk(9230:9265, 35 chars)",
+            "Chunk(9231:9265, 34 chars)",
+            "Chunk(9232:9265, 33 chars)",
+            "Chunk(9233:9265, 32 chars)",
+            "Chunk(9234:9265, 31 chars)",
+            "Chunk(9235:9265, 30 chars)",
+            "Chunk(9236:9265, 29 chars)",
+            "Chunk(9237:9265, 28 chars)",
+            "Chunk(9238:9265, 27 chars)",
+            "Chunk(9239:9265, 26 chars)",
+            "Chunk(9240:9265, 25 chars)",
+            "Chunk(9241:9265, 24 chars)",
+            "Chunk(9242:9265, 23 chars)",
+            "Chunk(9243:9265, 22 chars)",
+            "Chunk(9244:9265, 21 chars)",
+            "Chunk(9245:9265, 20 chars)",
+            "Chunk(9246:9265, 19 chars)",
+            "Chunk(9247:9265, 18 chars)",
+            "Chunk(9248:9265, 17 chars)",
+            "Chunk(9249:9265, 16 chars)",
+            "Chunk(9250:9265, 15 chars)",
+            "Chunk(9251:9265, 14 chars)",
+            "Chunk(9252:9265, 13 chars)",
+            "Chunk(9253:9265, 12 chars)",
+            "Chunk(9254:9265, 11 chars)",
+            "Chunk(9255:9265, 10 chars)",
+            "Chunk(9256:9265, 9 chars)",
+            "Chunk(9257:9265, 8 chars)",
+            "Chunk(9258:9265, 7 chars)",
+            "Chunk(9259:9265, 6 chars)",
+            "Chunk(9260:9265, 5 chars)",
+            "Chunk(9261:9265, 4 chars)",
+            "Chunk(9262:9265, 3 chars)",
+            "Chunk(9263:9265, 2 chars)",
+            "Chunk(9264:9265, 1 chars)"
+          ],
+          "metrics": {
+            "chunk_count": 213,
+            "avg_chunk_size": 149.13145539906102,
+            "min_chunk_size": 1,
+            "max_chunk_size": 1000,
+            "size_std_dev": 201.04406261773624,
+            "total_text_coverage": 3.4284943335132216,
+            "boundaries_detected": 10,
+            "boundaries_broken": 10,
+            "boundary_preservation_score": 0.0,
+            "sentence_count": 77,
+            "broken_sentence_count": 75,
+            "sentence_integrity_score": 0.025974025974025983
+          }
+        },
+        "Boundary-Aware": {
+          "strategy": "boundary_aware",
+          "document_length": 9265,
+          "boundaries": [
+            "Boundary(58, paragraph, conf=0.80)",
+            "Boundary(1535, topic_shift, conf=0.90)",
+            "Boundary(3060, paragraph, conf=0.80)",
+            "Boundary(3107, paragraph, conf=0.80)",
+            "Boundary(3155, paragraph, conf=0.80)",
+            "Boundary(3512, entity_change, conf=0.80)",
+            "Boundary(5843, temporal_shift, conf=0.70)",
+            "Boundary(6157, paragraph, conf=0.80)",
+            "Boundary(6204, paragraph, conf=0.80)",
+            "Boundary(6263, paragraph, conf=0.80)",
+            "Boundary(10100, format_change, conf=0.60)"
+          ],
+          "chunks": [
+            "Chunk(58:1026, 968 chars)",
+            "Chunk(1026:2451, 1425 chars)",
+            "Chunk(2451:2538, 87 chars)",
+            "Chunk(2551:3060, 509 chars)",
+            "Chunk(3155:4013, 858 chars)",
+            "Chunk(4013:5366, 1353 chars)",
+            "Chunk(5366:6138, 772 chars)",
+            "Chunk(6204:6263, 59 chars)",
+            "Chunk(6263:7616, 1353 chars)",
+            "Chunk(7616:8878, 1262 chars)",
+            "Chunk(8878:9241, 363 chars)"
+          ],
+          "metrics": {
+            "chunk_count": 11,
+            "avg_chunk_size": 819.0,
+            "min_chunk_size": 59,
+            "max_chunk_size": 1425,
+            "size_std_dev": 484.03493487745095,
+            "total_text_coverage": 0.972369131138694,
+            "boundaries_detected": 11,
+            "boundaries_broken": 3,
+            "boundary_preservation_score": 0.7272727272727273,
+            "sentence_count": 77,
+            "broken_sentence_count": 74,
+            "sentence_integrity_score": 0.038961038961038974
+          }
+        },
+        "Semantic": {
+          "strategy": "semantic",
+          "document_length": 9265,
+          "boundaries": [
+            "Boundary(58, paragraph, conf=0.80)",
+            "Boundary(768, entity_change, conf=0.80)",
+            "Boundary(1663, temporal_shift, conf=0.70)",
+            "Boundary(2971, entity_change, conf=0.90)",
+            "Boundary(3060, paragraph, conf=0.80)",
+            "Boundary(3107, paragraph, conf=0.80)",
+            "Boundary(3155, paragraph, conf=0.80)",
+            "Boundary(4576, topic_shift, conf=0.60)",
+            "Boundary(5941, entity_change, conf=0.80)",
+            "Boundary(6157, paragraph, conf=0.80)",
+            "Boundary(6204, paragraph, conf=0.80)",
+            "Boundary(6263, paragraph, conf=0.80)"
+          ],
+          "chunks": [
+            "Chunk(58:863, 805 chars)",
+            "Chunk(863:1530, 667 chars)",
+            "Chunk(1530:2241, 711 chars)",
+            "Chunk(2241:2925, 684 chars)",
+            "Chunk(3155:4132, 977 chars)",
+            "Chunk(4132:5549, 1417 chars)",
+            "Chunk(5549:6139, 590 chars)",
+            "Chunk(6204:6263, 59 chars)",
+            "Chunk(6263:7616, 1353 chars)",
+            "Chunk(7616:8878, 1262 chars)",
+            "Chunk(8878:9241, 363 chars)"
+          ],
+          "metrics": {
+            "chunk_count": 11,
+            "avg_chunk_size": 808.0,
+            "min_chunk_size": 59,
+            "max_chunk_size": 1417,
+            "size_std_dev": 399.29574366513214,
+            "total_text_coverage": 0.9593092282784673,
+            "boundaries_detected": 12,
+            "boundaries_broken": 4,
+            "boundary_preservation_score": 0.6666666666666667,
+            "sentence_count": 77,
+            "broken_sentence_count": 74,
+            "sentence_integrity_score": 0.038961038961038974
+          }
+        }
+      },
+      "comparison": {
+        "strategies_compared": [
+          "Traditional Fixed-Size",
+          "Boundary-Aware",
+          "Semantic"
+        ],
+        "metrics_comparison": {
+          "chunk_count": {
+            "Traditional Fixed-Size": 213,
+            "Boundary-Aware": 11,
+            "Semantic": 11
+          },
+          "avg_chunk_size": {
+            "Traditional Fixed-Size": 149.13145539906102,
+            "Boundary-Aware": 819.0,
+            "Semantic": 808.0
+          },
+          "boundary_preservation_score": {
+            "Traditional Fixed-Size": 0.0,
+            "Boundary-Aware": 0.7272727272727273,
+            "Semantic": 0.6666666666666667
+          },
+          "sentence_integrity_score": {
+            "Traditional Fixed-Size": 0.025974025974025983,
+            "Boundary-Aware": 0.038961038961038974,
+            "Semantic": 0.038961038961038974
+          }
+        },
+        "boundary_preservation_ranking": [
+          [
+            "Boundary-Aware",
+            0.7272727272727273
+          ],
+          [
+            "Semantic",
+            0.6666666666666667
+          ],
+          [
+            "Traditional Fixed-Size",
+            0.0
+          ]
+        ],
+        "sentence_integrity_ranking": [
+          [
+            "Boundary-Aware",
+            0.038961038961038974
+          ],
+          [
+            "Semantic",
+            0.038961038961038974
+          ],
+          [
+            "Traditional Fixed-Size",
+            0.025974025974025983
+          ]
+        ],
+        "chunk_size_comparison": {
+          "Traditional Fixed-Size": {
+            "min": 1,
+            "max": 1000,
+            "avg": 149.13145539906102,
+            "std_dev": 201.04406261773624
+          },
+          "Boundary-Aware": {
+            "min": 59,
+            "max": 1425,
+            "avg": 819.0,
+            "std_dev": 484.03493487745095
+          },
+          "Semantic": {
+            "min": 59,
+            "max": 1417,
+            "avg": 808.0,
+            "std_dev": 399.29574366513214
+          }
+        },
+        "overall_ranking": [
+          [
+            "Boundary-Aware",
+            0.5207792207792208
+          ],
+          [
+            "Semantic",
+            0.47835497835497837
+          ],
+          [
+            "Traditional Fixed-Size",
+            0.007792207792207795
+          ]
+        ],
+        "summary": {
+          "best_overall_strategy": "Boundary-Aware",
+          "boundary_preservation_winner": "Boundary-Aware",
+          "sentence_integrity_winner": "Boundary-Aware",
+          "chunk_count_comparison": {
+            "Traditional Fixed-Size": 213,
+            "Boundary-Aware": 11,
+            "Semantic": 11
+          }
+        }
+      },
+      "boundaries": [
+        "Boundary(58, paragraph, conf=0.80)",
+        "Boundary(2287, entity_change, conf=0.90)",
+        "Boundary(3060, paragraph, conf=0.80)",
+        "Boundary(3107, paragraph, conf=0.80)",
+        "Boundary(3155, paragraph, conf=0.80)",
+        "Boundary(4167, temporal_shift, conf=0.80)",
+        "Boundary(6157, paragraph, conf=0.80)",
+        "Boundary(6204, paragraph, conf=0.80)",
+        "Boundary(6263, paragraph, conf=0.80)",
+        "Boundary(6392, entity_change, conf=0.90)"
+      ]
+    },
+    "processing_time": 17.048227071762085
+  },
+  "indices": {
+    "fixed_size": {
+      "strategy": "fixed_size",
+      "chunk_count": 213,
+      "index_ids": [
+        "154d76f7-b32f-4a67-a5a2-56f9884b3720",
+        "e8fac144-c422-43e6-8c01-7259601be3f7",
+        "6bcac90c-4da6-4999-bd22-efcb69991cd5",
+        "5b0f51fa-a2db-4e1a-98e0-b9fdee600a66",
+        "a14ff131-b374-4ded-9c40-a606d505471e",
+        "c6b94be1-cb1f-46a7-ade3-0cafde198e9f",
+        "89192d2e-948b-4cac-b084-55a8b0a92bb5",
+        "cb46c31b-7269-40e8-993d-b182ade8a365",
+        "14f3b674-388f-4ff1-b7e9-a1a5170408c7",
+        "6194dfcd-da55-4ec5-8853-98f3c0df1e35",
+        "9f1f14ee-d072-4980-8a6f-d22e9ac53c54",
+        "5028c233-07de-4623-83ec-acd2dbf0d56d",
+        "b5c5ebbc-52ea-45c9-9cc0-c047eaaf4703",
+        "cc6ec509-411e-4b44-a1d5-e29649cb0ac3",
+        "c4ea4580-ac5c-4c36-b261-8b080dd49306",
+        "a16aadb7-5928-4014-9efe-044afef5be54",
+        "6f900e18-f46a-4975-b77f-a648b8b5034c",
+        "54124633-0a56-43f5-b1bc-357e9df39531",
+        "c8fb2674-1f0c-40a4-b33b-c151ef0561b0",
+        "5fa4f0c8-5c7d-454c-a68e-54ad3ee5d281",
+        "c1957e9a-a954-490f-b318-edd6b59f3777",
+        "dc221204-1652-436f-8ae4-12b8cb5bb6d6",
+        "a3de2461-be68-4268-95f2-de391ee0b435",
+        "6fca1ca0-ce58-4b00-af9f-f6998f86cea5",
+        "340e13c2-176e-4cff-b67f-12864789e89e",
+        "5321417f-cccf-4849-af3d-3bff415b4981",
+        "9dbbbf7a-0135-4a40-bc29-799d0ffeb30e",
+        "475f7f6a-a107-45b8-9a00-a3d4ae4764da",
+        "115ce0f3-5144-4a47-9e07-6809bfd677e4",
+        "45a8a5ee-b27e-47e8-8cd4-3d881fcf29f3",
+        "201dcb1f-90e5-4a1a-a542-bc08772064ed",
+        "a5e540fb-d96c-4100-ad63-ddb33905cd45",
+        "6347f123-58e7-410f-9b96-557e798c402f",
+        "a6903162-5228-4af1-8d08-4a30cd3cafcf",
+        "e3bca1c5-97db-496d-9659-eb1a5c6a7c41",
+        "a0c5cf4c-a400-490b-951b-34edc5955768",
+        "6601f148-8da2-45d9-a3fa-9053adec2f4e",
+        "a3f8b121-7623-4c70-b3e5-2ca585e4d16e",
+        "f8ac77f2-9c76-4787-9bae-9c0335814b50",
+        "57f87363-5e9d-4520-8f4f-77752991886d",
+        "1c47e7f7-9463-4362-a85b-8de0a4e4af86",
+        "57f1611c-89ac-4121-bf5c-013722f0db8a",
+        "01d7e5e7-e8e9-43b6-80d9-ff9739f83dbc",
+        "601b6926-8b52-4be7-979b-6234eee7a0b2",
+        "ae82bbfc-7d5d-46c0-8fae-31e99a430c94",
+        "6d79ad63-226c-4a41-b728-a1ac0905e01f",
+        "b4d29ad4-c88b-4cb6-bf30-982905af8659",
+        "dd5fcf03-e5c4-4c9d-a1f5-fbff492c1674",
+        "48fa1abf-dfac-49bd-9c21-a4bf45eaed91",
+        "1304fcb8-3376-402e-9972-d497e37f5134",
+        "0ca10f58-61bc-4fee-bcc7-1c817d1f9cac",
+        "ad4bc0df-8467-4ea2-8e49-15d162564261",
+        "71b21a34-01e2-4986-8d38-b83c4fad9980",
+        "28a09338-2cd1-446a-8346-b447b3cbc9ba",
+        "33123693-2951-44d5-a079-30c95944f063",
+        "60db4c34-308a-486d-990e-5a176bbdb63f",
+        "e81c83ea-17bc-4862-adca-838b088de1d0",
+        "4a6ea5f2-c431-4e0b-b201-21a5d6f2c29c",
+        "ceecaaec-f4fc-4ad0-b7cf-02dbebfb3724",
+        "d3611476-b9b3-4491-af24-922a9fd352ce",
+        "352ea70f-9943-48ef-a21e-62621f65a330",
+        "d6bd52a3-369b-451e-8555-668d014e6aa5",
+        "2fe6d410-29e8-46d0-9aa4-7d01ddcfe4a5",
+        "0bf6be09-e7ca-4679-bb28-58ae083b331a",
+        "58b509d5-2b41-48c9-9b32-ad91d51391f2",
+        "d8d620ac-904f-458e-976b-6d0c07d1cfd1",
+        "fa314e15-808b-46de-b89a-b033e3c42f9c",
+        "4ae16650-456e-4403-a26a-3f965abf713d",
+        "aa56a060-99ab-4131-b4cb-6a099ad4f678",
+        "e2d50b2d-e74c-41b7-bed3-b8b3a634523e",
+        "3240ea5d-98d5-4e17-b741-73e53aa3bc5c",
+        "18df0dc5-fa84-4345-ad6e-b9d8b0b8edbd",
+        "cd714190-5db7-4377-b7f6-b17dd1d2a78c",
+        "460515af-480d-4836-b100-330f045e1f07",
+        "a8d5e24b-dda7-4a7a-a818-834fb59a1683",
+        "0de04af9-5f4d-4144-91a8-09903a90e7e3",
+        "5b4797eb-d3c2-4a90-8d38-1e764edf9403",
+        "536a8f72-178f-4712-b815-a72ee96f7f9d",
+        "c83fd505-1fb8-4e1d-9179-499246a5b0e3",
+        "d2d84c56-aadc-4928-99d8-85fb484a2d11",
+        "2059eb7d-aa3f-4dff-ac03-7455f883bddc",
+        "d81d9e24-6eb5-43cd-b4f3-ed42afb4257b",
+        "c174d56b-e1cb-4520-91ae-9190113ecbe5",
+        "ceb8ad31-46bd-497f-be68-cdd3e15aefab",
+        "d876a7c2-2035-422e-84da-c3d11598dcdd",
+        "a840efa8-21e3-491f-9c69-5398d01a8234",
+        "f5e8cbf1-df50-4b43-80a9-6231e097597b",
+        "e5e52efe-7641-4870-9de4-df81e1de8e59",
+        "c0c2e8ae-201c-4ceb-b68a-4ba23087d727",
+        "b1efa6ae-9aa2-4543-bb73-a6b650177dc6",
+        "0db1e30b-859e-4ad8-a0ef-c95a60887055",
+        "77aa7070-c28b-4155-8bfe-92cce6399ab6",
+        "9a577a9d-1864-497c-a178-9b7a6715ab8a",
+        "80ce819f-80fb-40f5-8b6e-14c0dbfe6bae",
+        "aaa40e17-de31-41ce-933f-ac9515a0706e",
+        "58191741-8c42-4423-9023-588698164f77",
+        "773cac4a-c002-4015-9e1a-c590e471e00d",
+        "568bd59a-b632-45ed-8af6-3e8a1a1af90b",
+        "e503ddf3-d532-45c5-a815-5722260ade39",
+        "efa55d96-1f21-4dde-a67e-936977bfe5d1",
+        "fc84c564-8049-412f-8ddb-54d45f52945e",
+        "0d88c5c4-f907-494e-87ed-6e6631e302e7",
+        "95ab7852-c279-4aaf-81a7-139f15c503b5",
+        "4dc3ede1-286f-435b-aaf9-35ff06bc0a6c",
+        "540250a6-e19f-4276-b477-fb776008f177",
+        "f8e6f432-caa7-4cf4-9596-f9f734619ef2",
+        "ee11bd9b-06fb-4a9d-b04a-878f68dd98c1",
+        "5e192855-50f9-49a4-be95-d034bcc7067f",
+        "6f6689ed-08f3-4098-a0b6-59e14a9bae55",
+        "eb2481e2-9815-4ed5-b9f2-2b6b865ed641",
+        "a1a22fce-d6a2-4256-b923-4b8207f350db",
+        "430b86e5-b870-4f58-919c-d05997c12a66",
+        "8e60483b-91a1-4345-9445-fb3d051a9ca4",
+        "0e8c83ab-ebad-43ee-8fcb-3ac2723c7c3d",
+        "e23ef10b-da3e-4c23-932b-653dfc056284",
+        "f093c356-50a4-4595-9ab3-d36f49c1c35e",
+        "b8cee5fe-688a-4089-947d-a7ab2d3f7046",
+        "7f1c6968-ff8b-45cc-9f5f-cc5aeb3d5fbc",
+        "52464978-bf60-4e11-a5b6-1dec490c7987",
+        "8a609f1a-862e-4ef1-a98a-8c668500e3bc",
+        "c9243631-40b8-441e-acd7-e164cb603050",
+        "486accc5-9cb4-4767-8fb5-802f811a33b8",
+        "31c1df31-66c7-4d49-ada3-24a5ab7974c2",
+        "713d21f8-f08a-4358-8a93-0b88d876f872",
+        "6a0fc5c9-8f5c-40d8-976d-f4b3385065b2",
+        "385993e4-4737-47be-a707-edb57c04afef",
+        "4f1c01db-ad84-4ccb-ac53-03fdab19ad9a",
+        "b5786514-cd4a-474f-85d3-3a075cc83fef",
+        "0adb7d48-4a17-4dec-b13b-4dbe95e90b04",
+        "8aacc7aa-3be3-4fce-a1d0-6768f290d7c3",
+        "0ffd8aab-852e-45c9-9709-133c676e78f8",
+        "1655f747-7926-4977-9414-159bf6f0be32",
+        "03297dd4-41eb-44af-8026-4cd83ced446b",
+        "dd3f0dbd-b0ac-49d9-b352-31925b04f298",
+        "8fee325a-0d3e-4bd2-bd4c-a919f28a0b7b",
+        "f6a65dc0-69ea-4995-9976-7bf98fd2ec12",
+        "3e1a2f76-df21-42a1-a9c4-3ae861c27be8",
+        "09e040bd-3b18-4289-ad7a-f02d1bf003ea",
+        "a2cdc5e5-2144-4599-8516-8e484e11ab57",
+        "cdc69c0a-baee-4b31-a3b8-fac44e9d2974",
+        "c148fdd0-d045-47b0-8959-dc36c74b13df",
+        "3705b795-0a37-4c39-ba5a-df59cf457506",
+        "cab9ebbc-3244-4aec-8dd6-08fc79f205d8",
+        "ea99babb-1fd2-4079-bd1c-75dd438a65ef",
+        "4aca9aaa-8c72-40da-a890-e7ae711f9061",
+        "5c66f400-52ea-43c0-858f-84e2c45cc0b0",
+        "b6e124a4-10a3-4a7f-92cf-c5a660b3499d",
+        "3fa7ca27-632b-4b28-a31f-665aae43f052",
+        "84dd4a71-1f49-43d0-9d6d-4898e7163035",
+        "d3fed427-bec8-46ef-bc25-535a1fd6ce78",
+        "ece952c1-eabb-4b84-be51-27a572234d4e",
+        "d021b5dc-2392-47a7-8332-48ce2422a8c1",
+        "bc80f9ec-fb4d-4ada-8cf7-62d685b679f2",
+        "d829110f-906a-4e94-b05c-a11483f5aaa7",
+        "cfd97786-0cd0-4640-929d-416ce7d70137",
+        "a6da713e-a6d1-478a-b4d1-d9161f01cd5e",
+        "4820d50a-bd64-4cc7-83fe-1338139e2361",
+        "995940f7-0a2a-45dd-811f-50e31689e384",
+        "a03b55f1-8506-4b3f-beb1-dc9cdf361726",
+        "5c220caa-fbde-4d3d-bf54-5503119354f3",
+        "d1e696ee-dd42-4c29-a7b8-5828f3eb5c30",
+        "369c9da4-922b-41fb-b5c6-771ce82c1865",
+        "3101d8f2-3eb0-4eab-a83a-ccc9400f89d2",
+        "21b5eb91-7b02-4863-8559-5afa6fb6826d",
+        "092804d3-0132-4f37-be71-b7d6ee164c06",
+        "1e626eb3-5c88-4ae1-ad88-db155440d536",
+        "8573743d-8836-468a-8bb3-e60e734b7bbe",
+        "e0267bcb-7cb1-4b1f-9224-b4888c84d61d",
+        "ac5654e1-e67c-48a1-8e71-b87f94fb3951",
+        "663c17c1-5324-4eb0-865d-d6b8de25c506",
+        "b9839bbd-aec2-45d9-8f71-e9cab4a7c724",
+        "e586fa65-8f11-43d4-8977-e3fd1a9f1e10",
+        "bcb60272-3180-4e12-9d4b-101518999190",
+        "404d6afc-a65f-4464-b999-73108c6c9086",
+        "9025b18d-aa81-4e99-9646-9f317e486e9d",
+        "7ef5726b-c567-482d-b43b-2b2045dfb33c",
+        "500e1f47-e1b2-42d5-86cc-51df3550bf46",
+        "d07c0c74-2b84-41c9-acd5-5cd835fe903d",
+        "a7c129ec-d9b8-46e8-9b49-6448b1a98787",
+        "1e0f355f-9350-47ff-9d98-87e524f27753",
+        "b20f850b-fcb9-4ddc-9e0e-b021d523380e",
+        "41eb3744-5bdb-4927-9076-5321cddf0059",
+        "d433b15e-3605-42fa-a0a3-79e679e1db01",
+        "0ee59bf0-4767-4ce5-9386-a7a8a93b4be3",
+        "d92d6f07-5624-41c1-b4bd-d610d634dda7",
+        "a352619a-2d1c-4b0f-bfda-8562c8f8d071",
+        "586e39f9-08c9-440b-9ea8-8de7d7839044",
+        "0e5df512-1a72-4e61-a8c4-09f697dd1b54",
+        "c1491c85-5418-4f74-b052-d5682a56664d",
+        "93a05f2f-6d27-4069-b477-45b5f8c1db33",
+        "3b8a9ee8-e1a1-4d18-88d5-807633a6f6d5",
+        "60960253-0540-436a-a812-77a91e817974",
+        "86ef4062-406d-45ea-928e-a70b59190174",
+        "d32aa7f4-613f-42e0-ae92-6052c098f0d5",
+        "ef611779-82b6-43f0-84cb-4a5b010b18d9",
+        "52c8c45c-3792-4487-a218-f50b2bd330a4",
+        "abaa3250-dbb0-4466-bc71-0f5866de054b",
+        "22ee9c95-e38a-47c1-bb23-ce8080e70225",
+        "57ab018a-bde8-413a-8672-ee2e37b6603e",
+        "498ae8e6-d06d-47c7-804e-e2d65951b158",
+        "4fcca0f0-a6e7-4725-8faf-4052facdeb6a",
+        "9f004e6c-ccae-462e-827d-14d6cae955a4",
+        "a00c8e70-fe31-47c3-9456-bd024a4d181c",
+        "90b722f2-964b-4af5-b543-04faf539856b",
+        "715e328a-aa00-4c6f-9b38-e93096a5b4e1",
+        "79854993-6481-4c8d-b8c9-c2abc05040f5",
+        "535f469b-2498-45d3-8ae2-a1c0c0ab36d6",
+        "8f28a9cd-ff69-4a55-b179-dfc688e2b60d",
+        "13ca9bf7-0f7f-4fd1-97fe-d68232a32d2d",
+        "01ca9b4d-9f62-4a1c-835b-4a08b3641d1d",
+        "2b350e9d-fe6f-4600-8561-a01aa4321d89",
+        "ed633ed5-0109-4995-9beb-5743c0a63e8b",
+        "333ca983-40d8-4e2d-b945-aad2a0246ea1"
+      ],
+      "processing_time": 3.0739691257476807,
+      "collection_name": "rag_showdown_fixed_size_1741642301"
+    },
+    "boundary_aware": {
+      "strategy": "boundary_aware",
+      "chunk_count": 12,
+      "index_ids": [
+        "ce1f1e45-9dc1-4934-9a04-3ea5c0c0b2bd",
+        "5b8df348-4bcb-4586-858c-e3216985b796",
+        "a3516eee-257a-45ea-8aa3-c45bb581601f",
+        "adb1891c-04ae-4b9e-bb8c-3438963f863e",
+        "a2bd201c-245b-48a5-ac63-f7d60d75c231",
+        "e334522e-f849-4e0a-b6be-2724157caa15",
+        "f2d1a358-c14e-42b0-942c-b46dc1ce4eda",
+        "f62a423e-b9e0-4408-87d7-c7462754564f",
+        "afb9ee63-f04f-4888-9329-44c60b1c9467",
+        "df8aae66-2bae-45a0-9cf3-555adba6d80e",
+        "74c63431-caa0-4c55-8597-a48506cba511",
+        "25cbe91a-5753-4f2a-90ee-8046a120ab4e"
+      ],
+      "processing_time": 5.793102025985718,
+      "collection_name": "rag_showdown_boundary_aware_1741642304"
+    }
+  },
+  "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+  "retrieval_results": {
+    "fixed_size": {
+      "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+      "methods_compared": [
+        "vector",
+        "entity",
+        "context",
+        "hybrid"
+      ],
+      "top_k": 5,
+      "method_results": {
+        "vector": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "vector",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 0.41190099716186523,
+          "metadata": {
+            "top_k": 5
+          }
+        },
+        "entity": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "entity",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 1.971620798110962,
+          "metadata": {
+            "top_k": 5
+          }
+        },
+        "context": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "context",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 0.0010113716125488281,
+          "metadata": {
+            "top_k": 5
+          }
+        },
+        "hybrid": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "hybrid",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 0.00550079345703125,
+          "metadata": {
+            "top_k": 5
+          }
+        }
+      },
+      "comparison": {
+        "result_overlap": {
+          "vector_vs_entity": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "vector_vs_context": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "vector_vs_hybrid": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "entity_vs_context": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "entity_vs_hybrid": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "context_vs_hybrid": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          }
+        },
+        "unique_results": {
+          "vector": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          },
+          "entity": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          },
+          "context": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          },
+          "hybrid": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          }
+        },
+        "speed_comparison": {
+          "vector": 0.41190099716186523,
+          "entity": 1.971620798110962,
+          "context": 0.0010113716125488281,
+          "hybrid": 0.00550079345703125
+        },
+        "result_diversity": {
+          "vector": {
+            "error": "No results with similarity scores"
+          },
+          "entity": {
+            "error": "No results with similarity scores"
+          },
+          "context": {
+            "error": "No results with similarity scores"
+          },
+          "hybrid": {
+            "error": "No results with similarity scores"
+          }
+        },
+        "summary": {
+          "fastest_method": "context",
+          "fastest_time": 0.0010113716125488281,
+          "most_unique_method": "vector",
+          "most_unique_percentage": 0.0,
+          "highest_overlap": "vector_vs_entity"
+        }
+      },
+      "total_comparison_time": 2.3901498317718506
+    },
+    "boundary_aware": {
+      "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+      "methods_compared": [
+        "vector",
+        "entity",
+        "context",
+        "hybrid"
+      ],
+      "top_k": 5,
+      "method_results": {
+        "vector": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "vector",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 0.24788522720336914,
+          "metadata": {
+            "top_k": 5
+          }
+        },
+        "entity": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "entity",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 1.2700936794281006,
+          "metadata": {
+            "top_k": 5
+          }
+        },
+        "context": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "context",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 0.001264810562133789,
+          "metadata": {
+            "top_k": 5
+          }
+        },
+        "hybrid": {
+          "query": "Compare Dell Technologies Inc. and Dell based on the document.",
+          "method": "hybrid",
+          "results": [],
+          "result_count": 0,
+          "retrieval_time": 0.004178285598754883,
+          "metadata": {
+            "top_k": 5
+          }
+        }
+      },
+      "comparison": {
+        "result_overlap": {
+          "vector_vs_entity": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "vector_vs_context": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "vector_vs_hybrid": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "entity_vs_context": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "entity_vs_hybrid": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          },
+          "context_vs_hybrid": {
+            "overlap_count": 0,
+            "overlap_percentage": 0.0
+          }
+        },
+        "unique_results": {
+          "vector": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          },
+          "entity": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          },
+          "context": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          },
+          "hybrid": {
+            "unique_count": 0,
+            "unique_percentage": 0.0,
+            "unique_ids": []
+          }
+        },
+        "speed_comparison": {
+          "vector": 0.24788522720336914,
+          "entity": 1.2700936794281006,
+          "context": 0.001264810562133789,
+          "hybrid": 0.004178285598754883
+        },
+        "result_diversity": {
+          "vector": {
+            "error": "No results with similarity scores"
+          },
+          "entity": {
+            "error": "No results with similarity scores"
+          },
+          "context": {
+            "error": "No results with similarity scores"
+          },
+          "hybrid": {
+            "error": "No results with similarity scores"
+          }
+        },
+        "summary": {
+          "fastest_method": "context",
+          "fastest_time": 0.001264810562133789,
+          "most_unique_method": "vector",
+          "most_unique_percentage": 0.0,
+          "highest_overlap": "vector_vs_entity"
+        }
+      },
+      "total_comparison_time": 1.5235390663146973
+    }
+  },
+  "synthesis_results": {
+    "error": "No context chunks available for synthesis comparison"
+  },
+  "file_path": "data/dev_eval_files.json",
+  "output_dir": "output",
+  "total_processing_time": 34.7657630443573
+}

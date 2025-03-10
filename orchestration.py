@@ -64,7 +64,9 @@ def load_document(file_path: Optional[str] = None, text_content: Optional[str] =
 def run_rag_showdown(file_path: Optional[str] = None, 
                     text_content: Optional[str] = None,
                     query: Optional[str] = None,
-                    output_dir: Optional[str] = None) -> Dict[str, Any]:
+                    output_dir: Optional[str] = None,
+                    progress_callback=None,
+                    document_insights: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
     Run the RAG Showdown analysis workflow.
     
@@ -73,6 +75,8 @@ def run_rag_showdown(file_path: Optional[str] = None,
         text_content: Direct text input (alternative to file_path)
         query: Query for testing retrieval and synthesis
         output_dir: Directory to save results
+        progress_callback: Optional callback function for progress updates
+        document_insights: Optional pre-generated document insights
         
     Returns:
         Dictionary with analysis results
@@ -90,16 +94,69 @@ def run_rag_showdown(file_path: Optional[str] = None,
     document_text = load_document(file_path, text_content)
     logger.info(f"Loaded document ({len(document_text)} chars)")
     
+    # Report progress if callback provided
+    if progress_callback:
+        progress_callback("document loading", 10)
+    
     # Create analysis pipeline
     pipeline = AnalysisPipeline()
     
-    # Run analysis
-    results = pipeline.run_complete_analysis(document_text, query)
+    # Run analysis with progress updates
+    results = {
+        "session_id": session_id,
+        "document_length": len(document_text)
+    }
+    
+    # Store document insights if provided
+    if document_insights:
+        results["document_insights"] = document_insights
+    
+    # Document analysis
+    document_analysis = pipeline.analyze_document(document_text)
+    results["document_analysis"] = document_analysis
+    
+    if progress_callback:
+        progress_callback("document analysis", 25)
+    
+    # Chunking comparison
+    chunking_results = pipeline.compare_chunking_strategies(document_text)
+    results["chunking_results"] = chunking_results
+    
+    if progress_callback:
+        progress_callback("chunking comparison", 40)
+    
+    # Build indices
+    indices = pipeline.build_retrieval_indices(document_text, chunking_strategies=["fixed_size", "boundary_aware"])
+    results["indices"] = {k: {key: v[key] for key in v if key != "index_processor"} for k, v in indices.items()}
+    
+    if progress_callback:
+        progress_callback("retrieval index building", 60)
+    
+    # Generate query if not provided
+    if not query:
+        summary = document_analysis.get("summary", "")
+        query = f"What are the main topics discussed in this document: {summary[:100]}...?"
+        
+    results["query"] = query
+    
+    # Retrieval comparison
+    retrieval_results = pipeline.compare_retrieval_methods(query, indices)
+    results["retrieval_results"] = retrieval_results
+    
+    if progress_callback:
+        progress_callback("retrieval comparison", 75)
+    
+    # Synthesis comparison
+    synthesis_results = pipeline.compare_synthesis_methods(query, retrieval_results)
+    results["synthesis_results"] = synthesis_results
+    
+    if progress_callback:
+        progress_callback("synthesis comparison", 90)
     
     # Add session information
-    results["session_id"] = session_id
     results["file_path"] = file_path
     results["output_dir"] = output_dir
+    results["total_processing_time"] = time.time() - document_analysis.get("start_time", time.time())
     
     # Save results to JSON file
     output_file = os.path.join(output_dir, f"{session_id}_results.json")
@@ -111,6 +168,9 @@ def run_rag_showdown(file_path: Optional[str] = None,
     # Generate report
     report_file = generate_report(results, output_dir)
     results["report_file"] = report_file
+    
+    if progress_callback:
+        progress_callback("report generation", 100)
     
     return results
 

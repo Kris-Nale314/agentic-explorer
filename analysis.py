@@ -66,7 +66,8 @@ class AnalysisPipeline:
             "metrics": metrics,
             "boundaries": boundaries,
             "summary": summary,
-            "processing_time": processing_time
+            "processing_time": processing_time, 
+            "start_time": start_time
         }
     
     def compare_chunking_strategies(self, document_text: str) -> Dict[str, Any]:
@@ -120,6 +121,9 @@ class AnalysisPipeline:
         for strategy in chunking_strategies:
             start_time = time.time()
             
+            # Create a unique collection name for this strategy and session
+            collection_name = f"rag_showdown_{strategy}_{int(time.time())}"
+            
             # 1. Chunk document
             chunking_result = self.chunking_processor.chunk_document(
                 text=document_text,
@@ -132,7 +136,7 @@ class AnalysisPipeline:
             
             # 3. Build index
             # Create a separate collection for each strategy
-            index = IndexProcessor(collection_name=f"rag_showdown_{strategy}")
+            index = IndexProcessor(collection_name=collection_name)
             index_ids = index.build_index_from_embeddings(embedded_chunks)
             
             processing_time = time.time() - start_time
@@ -142,8 +146,11 @@ class AnalysisPipeline:
                 "chunk_count": len(chunks),
                 "index_ids": index_ids,
                 "processing_time": processing_time,
-                "index_processor": index  # Keep reference to the index
+                "index_processor": index,  # Keep reference to the index
+                "collection_name": collection_name
             }
+            
+            logger.info(f"Built index for {strategy} strategy with {len(chunks)} chunks in {processing_time:.2f}s")
         
         return indices
     
