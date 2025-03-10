@@ -79,11 +79,11 @@ def show_document_understanding(document_text, verbose=False):
         summarizer = SummarizationProcessor()
         
         # Extract basic summary
-        progress.update(task, completed=20, description="Generating concise summary...")
+        progress.update(task, completed=10, description="Generating concise summary...")
         basic_summary = summarizer.basic_summary(document_text, style="concise")
         
         # Extract entity-focused summary
-        progress.update(task, completed=40, description="Identifying key entities...")
+        progress.update(task, completed=30, description="Identifying key entities...")
         entity_summary = summarizer.entity_focused_summary(document_text)
         
         # Extract temporal summary

@@ -136,7 +136,10 @@ class AnalysisPipeline:
             
             # 3. Build index
             # Create a separate collection for each strategy
-            index = IndexProcessor(collection_name=collection_name)
+            index = IndexProcessor(
+                collection_name=collection_name,
+                use_chroma=False  # Use in-memory for demo purposes
+            )
             index_ids = index.build_index_from_embeddings(embedded_chunks)
             
             processing_time = time.time() - start_time

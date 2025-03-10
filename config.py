@@ -30,7 +30,7 @@ class Config:
     
     # Paths
     DATA_DIR = os.environ.get('DATA_DIR', 'data')
-    TEST_DATA_FILE = os.path.join(DATA_DIR, os.environ.get('TEST_DATA_FILE', 'dev_eval_files.json'))
+    TEST_DATA_FILE = os.path.join(DATA_DIR, os.environ.get('TEST_DATA_FILE', 'dev_eval_files.txt'))
     OUTPUT_DIR = os.environ.get('OUTPUT_DIR', 'output')
     
     @classmethod

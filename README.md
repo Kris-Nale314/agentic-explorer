@@ -1,131 +1,164 @@
-# 🚀 Agentic Explorer
+# 🚀 Agentic Explorer: Advanced RAG System Demonstration Platform
 
-**Demystifying aspects of Agentic AI in the context of RAG systems**
+**Diving into the Architectural Underpinnings of Agentic and Traditional Retrieval-Augmented Generation (RAG) Systems**
 
-## 💡 What is Agentic AI 
+## 💡 Core Concept - Why is everyone talking about Agentic AI
 
-Ever wondered why your carefully built RAG system still hallucinates despite your best efforts? You're not alone.
+Retrieval-Augmented Generation (RAG) systems enhance large language models (LLMs) by feeding them relevant external information. However, traditional RAG systems often fall short—not due to LLM limitations but because of how they retrieve and integrate information. Many of these systems struggle to understand the structure and context of documents, which can lead to confusing or inaccurate responses.
 
-This repo is my lab  - comparing **traditional RAG pipelines** against **multi-agent "Agentic RAG" approaches** in a direct showdown. 
+Agentic Explorer is a platform designed to showcase the differences between traditional and agentic RAG approaches. It provides a transparent look at how each method handles document structure, context, and retrieval strategies. The goal is to highlight why a deeper understanding of document architecture can make or break RAG performance.
 
-> *"RAG isn't just about retrieving chunks - it's about understanding document architecture and context flow."*
+> *"Your data strategy is as important as your solution architecture."*
 
-## 🔥 Why This Matters
+This concept isn't just theoretical—it has real-world implications for building reliable, production-ready AI systems.
 
-Here is what I've found - that traditional RAG pipelines consistently fail in predictable ways:
 
-- **Boundary Blindness**: Chunking that ignores natural document boundaries, destroying context
-- **Entity Confusion**: Inability to track and disambiguate similar entities across documents
-- **Context Fragmentation**: Loss of critical relationships between concepts
-- **Reasoning Gaps**: Failure to connect related information that spans multiple chunks
+## 🔥 Significance and Problem Statement
 
-These aren't theoretical problems - they're the reason your RAG system hallucinates dates, mixes up companies, or invents nonexistent relationships.
+Agentic Explorer is designed to highlight these critical challenges, which can be categorized as the "Four Horsemen of the RAG Apocalypse":
 
-## 🧠 The Agentic RAG Crew
+- **Boundary Disregard**: Traditional chunking methods often break documents into pieces without respecting natural boundaries (e.g., sections, paragraphs). This random segmentation can lead to lost context and garbled responses.
 
-Instead of one model doing everything, Agentic RAG employs specialist agents:
+- **Entity Contextual Amnesia**:  When traditional RAGs move between document chunks, they often lose track of important entities and their evolving context. This can result in inconsistent and inaccurate references throughout generated responses.
 
-| Agent | Role | Why It Matters |
-|-------|------|----------------|
-| **🔍 Boundary Detective** | Identifies natural document boundaries | Preserves critical context across chunks |
-| **🔎 Entity Tracker** | Disambiguates and tracks entities | Prevents confusion between similar companies, people, or concepts |
-| **🔗 Context Connector** | Finds relationships between segments | Ensures reasoning can span multiple chunks coherently |
-| **⚖️ Analysis Judge** | Synthesizes insights from specialists | Creates coherent, accurate summaries from fragmented information |
+- **Conceptual Fragmentation**:  Semantically related ideas that get separated across arbitrary chunks can become isolated. Traditional RAGs often struggle to reconnect these fragments into a coherent understanding.
 
-## 💥 Core Features: The RAG Showdown
+- **Temporal Contextual Disorientation**:  Ignoring temporal cues in documents can lead to confusion about the sequence of events or the timing of information. This is especially problematic for queries that depend on chronological accuracy.
 
-This repo lets you run head-to-head comparisons between traditional and agentic approaches:
+By making these architectural differences visible and measurable, Agentic Explorer aims to elevate the conversation around RAG systems and provide a blueprint for building smarter, more resilient AI solutions.
 
-- **Chunking Strategy Deathmatch**: Fixed-size chunking vs. boundary-aware segmentation
-- **Retrieval Method Battle Royale**: Basic vector search vs. entity-aware, context-enhanced retrieval
-- **Synthesis Showdown**: Single-prompt LLM vs. multi-agent collaborative analysis
-- **Hallucination Hunter**: Identify and track factual inconsistencies between approaches
+## 🧠 Meet The Processors
 
-All with detailed metrics and visualizations so you can see *exactly* why one approach outperforms the other.
+Agentic Explorer is built around modular processors that can be composed in both traditional and agentic configurations:
 
-## 🧪 Interactive RAG Labs
+| Processor | Purpose | What It Reveals |
+|-----------|---------|----------------|
+| **DocumentProcessor** | Analyzes document structure and content | Complexity factors that affect RAG performance |
+| **ChunkingProcessor** | Slices documents into retrievable pieces | How intelligent boundaries preserve context |
+| **EmbeddingProcessor** | Generates vector representations | Efficiency of different embedding approaches |  
+| **IndexProcessor** | Manages vector database operations | Storage and retrieval mechanics |
+| **RetrievalProcessor** | Finds relevant chunks for queries | How entity-aware search outperforms basic similarity |
+| **SummarizationProcessor** | Creates different summary types | How summary strategy affects understanding |
+| **SynthesisProcessor** | Combines retrieved info into answers | Why multi-agent synthesis reduces hallucinations |
 
-1. **Chunking Strategy Lab**: Experiment with different chunking strategies on your own documents
-2. **Retrieval Arena**: Compare search relevance between traditional and agentic approaches
-3. **Agent Collaboration Explorer**: Step through the agent workflow and see how specialists contribute
+## 🤖 The Agentic Approach
 
-## 📁 Project Structure
+At its core, "agentic AI" means breaking down complex tasks into specialized roles rather than expecting a single model to do everything. Instead of one overwhelmed LLM, we create a team of specialized agents that each handle a specific aspect of the problem:
+
+| Agent | Based On | Responsibility |
+|-------|----------|----------------|
+| **Boundary Detective** | ChunkingProcessor | Identifies natural document transitions |
+| **Entity Tracker** | RetrievalProcessor | Disambiguates and tracks entities across chunks |
+| **Context Connector** | RetrievalProcessor | Finds relationships between information fragments |
+| **Research Analyst** | SynthesisProcessor | Extracts and evaluates relevant facts |
+| **Information Synthesizer** | SynthesisProcessor | Creates coherent responses from fragmented information |
+| **Quality Controller** | SynthesisProcessor | Evaluates factual accuracy and completeness |
+
+Each agent is a lightweight wrapper around our processors, adding specialized prompting and decision-making. This approach represents both a practical architecture and an educational metaphor - breaking down complex systems into understandable components mirrors how human teams tackle difficult problems.
+
+## 🔬 Technical Approach
+
+### File Structure
 
 ```
 agentic-explorer/
-├── processors/                 # Modular RAG Components
-│   ├── document_processor.py   # Document handling
-│   ├── chunking_processor.py   # Traditional & Agentic chunking
-│   ├── embedding_processor.py  # Vector embedding generation
-│   ├── index_processor.py      # Vector DB management
-│   ├── retrieval_processor.py  # Search strategies
-│   └── synthesis_processor.py  # Analysis approaches
-├── agents/                     # The Agentic Dream Team
-│   ├── boundary_detective.py   # Intelligent boundary detection
-│   ├── entity_tracker.py       # Entity disambiguation
-│   ├── context_connector.py    # Relationship mapping
-│   └── analysis_judge.py       # Synthesis orchestration
-├── run_demo.py                 # Run the RAG Showdown
-└── ... (other standard files)
+├── processors/
+│   ├── __init__.py 
+│   ├── chunking.py         # Chunking strategies (fixed-size vs. boundary-aware)
+│   ├── document.py         # Document analysis and metrics
+│   ├── embedding.py        # Vector embedding generation 
+│   ├── index.py            # Vector storage (ChromaDB or in-memory)
+│   ├── retrieval.py        # Search methods (vector, entity-aware, hybrid)
+│   ├── summarize.py        # Multi-strategy summarization
+│   └── synthesis.py        # Response generation approaches
+├── utils/
+│   ├── __init__.py
+│   └── openai_client.py    # OpenAI API wrapper
+├── analysis.py             # Core analysis pipeline
+├── orchestration.py        # Workflow coordination
+├── run_demo.py             # CLI interface
+├── config.py               # Configuration management
+├── requirements.txt        # Dependencies
+└── README.md               # You are here
 ```
 
-## 🛠️ Tech Stack
+## 🚀 Getting Started
 
-- **CrewAI**: For orchestrating multi-agent workflows
-- **OpenAI**: GPT-3.5/4 for agent implementation
-- **ChromaDB**: Vector storage and search
-- **NLTK**: Natural language processing
-- **Streamlit**: Interactive UI (coming soon!)
-
-## 🧑‍💻 Quick Start
+### Installation
 
 ```bash
 # Clone the repo
-git clone https://github.com/kris-nale314/agentic-explorer.git
+git clone https://github.com/your-username/agentic-explorer.git
 cd agentic-explorer
 
-# Set up environment
+# Create a virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up your API keys in .env
-# OPENAI_API_KEY=your_key_here
-
-# Run a basic comparison
-python run_demo.py --document data/samples/mixed_earnings.txt --query "Dell revenue growth"
+# Set up environment variables
+echo "OPENAI_API_KEY=your-api-key-here" > .env
 ```
 
-## 🔬 Show Me The Science!
+### Running the Demo
 
-Run your own head-to-head comparison:
+```bash
+# Basic RAG showdown
+python run_demo.py --document data/samples/mixed_earnings.txt
+
+# With document understanding phase
+python run_demo.py --document data/samples/mixed_earnings.txt --summaries
+
+# Custom query
+python run_demo.py --document your_file.txt --query "Compare the financial performance of Apple and Microsoft"
+```
+
+## 🧪 Development Notes
+
+### Adding New Strategies
+
+Agentic Explorer is designed for extensibility. To add a new chunking, retrieval, or synthesis strategy:
+
+1. Add the strategy implementation to the appropriate processor
+2. Update the `compare_*` methods to include your strategy
+3. Implement any necessary evaluation metrics
+
+### Metrics Schema
+
+The project uses a standardized metrics schema for visualization and comparison:
 
 ```python
-from run_demo import run_rag_showdown
-
-# Compare traditional vs. agentic RAG
-results = run_rag_showdown(
-    file_path="your_document.pdf",
-    chunking_strategies=["fixed_size", "boundary_aware"],
-    search_query="financial performance of Dell"
-)
-
-# See why agentic RAG won
-print(results["chunking_showdown"]["boundary_preservation_score"])
-print(results["search_method_faceoff"]["relevance_comparison"])
-print(results["hallucination_metrics"]["factual_consistency_score"])
+{
+  "comparison_type": "string",
+  "compared_entities": [
+    {
+      "name": "string",
+      "description": "string",
+      "metrics": {
+        "metric_name": {
+          "value": number,
+          "display_format": "string",
+          "visualization_hint": "string",
+          "interpretation": "string"
+        }
+      }
+    }
+  ]
+}
 ```
 
-## 🤝 Join The RAG Revolution!
+## 🔮 Future Work
 
-This project is my sandbox for exploring better RAG architectures. Found it useful? Have ideas?
+- **Interactive Visualizations**: Clickable nodes showing agent interaction graphs
+- **Challenge Document Set**: Curated examples that break traditional RAG in educational ways
+- **Hybrid Strategy Development**: Best-of-both-worlds approaches for different document types
+- **Streaming Agent Thinking**: Real-time visualization of agent reasoning
 
-- **Star** this repo if you found it helpful
-- **Fork** it to build your own experiments
-- **Contribute** new processors, agents, or test datasets
-- **Open issues** with your findings or challenges
+## 📜 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 

@@ -5,7 +5,7 @@ Synthesis processor for the RAG Showdown.
 This module handles the final synthesis of retrieved information,
 comparing traditional single-prompt approaches with multi-agent strategies.
 """
-
+import os
 import logging
 import time
 import json
@@ -16,6 +16,8 @@ from utils.openai_client import OpenAIClient
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+default_model = os.environ.get('DEFAULT_MODEL', 'gpt-3.5-turbo')
+
 class SynthesisProcessor:
     """
     Processor for synthesizing information from retrieved document chunks.
@@ -25,6 +27,7 @@ class SynthesisProcessor:
     def __init__(self):
         """Initialize the synthesis processor."""
         self.openai_client = OpenAIClient()
+        self.default_model = default_model
         logger.info("Initialized SynthesisProcessor")
     
     def single_prompt_synthesis(self, 
@@ -102,7 +105,7 @@ class SynthesisProcessor:
                 "chunk_count": len(context_chunks),
                 "context_length": len(combined_context),
                 "method": "single_prompt",
-                "model": model or self.openai_client.model
+                "model": model or self.default_model
             }
             
             logger.info(f"Single-prompt synthesis completed in {processing_time:.2f}s")
@@ -204,7 +207,7 @@ class SynthesisProcessor:
                 "context_length": len(combined_context),
                 "entities": entities,
                 "method": "entity_focused",
-                "model": model or self.openai_client.model
+                "model": model or self.default_model 
             }
             
             logger.info(f"Entity-focused synthesis completed in {processing_time:.2f}s")
@@ -436,7 +439,7 @@ class SynthesisProcessor:
                     "researcher": researcher_insights,
                     "critic_feedback": critic_response if "satisfactory" not in critic_response.lower() else "Approved"
                 },
-                "model": model or self.openai_client.model
+                "model": self.default_model
             }
             
             logger.info(f"Multi-agent synthesis completed in {processing_time:.2f}s")
@@ -555,7 +558,7 @@ class SynthesisProcessor:
                 context_chunks=context_chunks,
                 method=method,
                 max_tokens=max_tokens,
-                model=model
+                model=self.default_model
             )
             
             method_results[method] = method_result
