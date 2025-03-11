@@ -1,6 +1,14 @@
-# 🚀 Agentic Explorer: Advanced RAG System Demonstration Platform
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+![Chroma](https://img.shields.io/badge/Chroma-464B8A?style=for-the-badge&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-3178C6?style=for-the-badge&logo=langchain&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-**Diving into the Architectural Underpinnings of Agentic and Traditional Retrieval-Augmented Generation (RAG) Systems**
+# 🚀 Agentic Explorer
+
+### **Diving into the Architectural Underpinnings of Agentic Systems**
 
 ## 💡 Core Concept - Why is everyone talking about Agentic AI
 
