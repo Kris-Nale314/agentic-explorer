@@ -7,7 +7,7 @@
 # 🚀 Agentic Explorer
 
 <div align="center">
-  <img src="docs/images/agentic-explorer-logo.svg" alt="Agentic Explorer Logo" width="400" height="400">
+  <img src="docs/images/agentic_explorer_logo.svg" alt="Agentic Explorer Logo" width="400" height="400">
 </div>
 
 ### **Diving into the Architectural Underpinnings of Agentic Systems**
