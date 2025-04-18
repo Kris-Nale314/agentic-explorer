@@ -1,0 +1,6 @@
+Title: Dell Technologies Unveils Infrastructure Innovations Built to Power Modern AI-Ready Data Centers
+Date: 2025-04-08 09:00:00
+Source: businesswire.com
+URL: https://www.businesswire.com/news/home/20250408152007/en/Dell-Technologies-Unveils-Infrastructure-Innovations-Built-to-Power-Modern-AI-Ready-Data-Centers/
+
+ROUND ROCK, Texas--(BUSINESS WIRE)--Dell Technologies (NYSE: DELL) introduces advancements across its industry-leading server, storage and data protection portfolios designed to help organizations achieve data center modernization. Why It Matters: Organizations are rethinking their IT strategies to respond to the rise of AI, the need to support both traditional and modern workloads and increased cyber threats. IT teams are moving toward disaggregated infrastructure that abstracts compute, stora.

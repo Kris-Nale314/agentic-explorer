@@ -1,0 +1,29 @@
+[
+  {
+    "symbol": "META",
+    "fillingDate": "2024-10-31 00:00:00",
+    "acceptedDate": "2024-10-30 19:54:51",
+    "cik": "0001326801",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000081/0001326801-24-000081-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000081/meta-20240930.htm"
+  },
+  {
+    "symbol": "META",
+    "fillingDate": "2024-08-01 00:00:00",
+    "acceptedDate": "2024-07-31 20:14:40",
+    "cik": "0001326801",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000069/0001326801-24-000069-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000069/meta-20240630.htm"
+  },
+  {
+    "symbol": "META",
+    "fillingDate": "2024-04-25 00:00:00",
+    "acceptedDate": "2024-04-24 20:14:19",
+    "cik": "0001326801",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000049/0001326801-24-000049-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000049/meta-20240331.htm"
+  }
+]

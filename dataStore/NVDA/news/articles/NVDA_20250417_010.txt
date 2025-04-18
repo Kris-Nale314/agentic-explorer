@@ -1,0 +1,6 @@
+Title: How Nvidia Plays Export Whack-a-Mole
+Date: 2025-04-17 19:09:00
+Source: wsj.com
+URL: https://www.wsj.com/economy/trade/nvidia-china-us-export-rules-0a3e9280
+
+As the U.S. has stepped up chip-export restrictions, Nvidia has maintained a China presence by making versions of its powerful processors that qualify for sale there.

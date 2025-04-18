@@ -1,0 +1,83 @@
+[
+  {
+    "symbol": "DELL",
+    "fillingDate": "2024-12-10 00:00:00",
+    "acceptedDate": "2024-12-10 16:20:21",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199624000143/0001571996-24-000143-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199624000143/dell-20241101.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2024-09-10 00:00:00",
+    "acceptedDate": "2024-09-10 16:09:32",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199624000090/0001571996-24-000090-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199624000090/dell-20240802.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2024-06-11 00:00:00",
+    "acceptedDate": "2024-06-11 16:03:36",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199624000062/0001571996-24-000062-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199624000062/dell-20240503.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2023-12-08 00:00:00",
+    "acceptedDate": "2023-12-08 08:32:51",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199623000046/0001571996-23-000046-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199623000046/dell-20231103.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2023-09-12 00:00:00",
+    "acceptedDate": "2023-09-12 16:27:00",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199623000032/0001571996-23-000032-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199623000032/dell-20230804.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2023-06-12 00:00:00",
+    "acceptedDate": "2023-06-12 16:43:52",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199623000019/0001571996-23-000019-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199623000019/dell-20230505.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2022-12-05 00:00:00",
+    "acceptedDate": "2022-12-05 16:13:45",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199622000044/0001571996-22-000044-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199622000044/dell-20221028.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2022-09-01 00:00:00",
+    "acceptedDate": "2022-09-01 16:21:14",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199622000031/0001571996-22-000031-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199622000031/dell-20220729.htm"
+  },
+  {
+    "symbol": "DELL",
+    "fillingDate": "2022-06-06 00:00:00",
+    "acceptedDate": "2022-06-06 16:09:19",
+    "cik": "0001571996",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1571996/000157199622000021/0001571996-22-000021-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1571996/000157199622000021/dell-20220429.htm"
+  }
+]

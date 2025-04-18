@@ -1,0 +1,128 @@
+[
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2024-10-24 00:00:00",
+    "acceptedDate": "2024-10-23 20:42:47",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024043486/0001628280-24-043486-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024043486/tsla-20240930.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2024-07-24 00:00:00",
+    "acceptedDate": "2024-07-23 19:41:09",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/0001628280-24-032662-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2024-04-24 00:00:00",
+    "acceptedDate": "2024-04-23 20:27:48",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024017503/0001628280-24-017503-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024017503/tsla-20240331.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2023-10-23 00:00:00",
+    "acceptedDate": "2023-10-20 18:41:03",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000162828023034847/0001628280-23-034847-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000162828023034847/tsla-20230930.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2023-07-24 00:00:00",
+    "acceptedDate": "2023-07-21 18:08:29",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023033872/0000950170-23-033872-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023033872/tsla-20230630.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2023-04-24 00:00:00",
+    "acceptedDate": "2023-04-21 18:05:23",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023013890/0000950170-23-013890-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023013890/tsla-20230331.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2022-10-24 00:00:00",
+    "acceptedDate": "2022-10-24 06:08:50",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022019867/0000950170-22-019867-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022019867/tsla-20220930.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2022-07-25 00:00:00",
+    "acceptedDate": "2022-07-25 06:07:25",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022012936/0000950170-22-012936-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022012936/tsla-20220630.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2022-04-25 00:00:00",
+    "acceptedDate": "2022-04-22 21:36:59",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022006034/0000950170-22-006034-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022006034/tsla-20220331.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2021-10-25 00:00:00",
+    "acceptedDate": "2021-10-25 06:12:15",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021002253/0000950170-21-002253-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021002253/tsla-20210930.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2021-07-27 00:00:00",
+    "acceptedDate": "2021-07-27 06:47:13",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021000524/0000950170-21-000524-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021000524/tsla-20210630.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2021-04-28 00:00:00",
+    "acceptedDate": "2021-04-27 20:02:05",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021000046/0000950170-21-000046-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021000046/tsla-20210331.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2020-10-26 00:00:00",
+    "acceptedDate": "2020-10-26 06:06:44",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020047486/0001564590-20-047486-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020047486/tsla-10q_20200930.htm"
+  },
+  {
+    "symbol": "TSLA",
+    "fillingDate": "2020-07-28 00:00:00",
+    "acceptedDate": "2020-07-28 06:03:48",
+    "cik": "0001318605",
+    "type": "10-Q",
+    "link": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020033670/0001564590-20-033670-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1318605/000156459020033670/tsla-10q_20200630.htm"
+  }
+]

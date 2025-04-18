@@ -1,0 +1,20 @@
+[
+  {
+    "symbol": "META",
+    "fillingDate": "2025-01-30 00:00:00",
+    "acceptedDate": "2025-01-29 20:00:50",
+    "cik": "0001326801",
+    "type": "10-K",
+    "link": "https://www.sec.gov/Archives/edgar/data/1326801/000132680125000017/0001326801-25-000017-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1326801/000132680125000017/meta-20241231.htm"
+  },
+  {
+    "symbol": "META",
+    "fillingDate": "2024-02-02 00:00:00",
+    "acceptedDate": "2024-02-01 19:39:02",
+    "cik": "0001326801",
+    "type": "10-K",
+    "link": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000012/0001326801-24-000012-index.htm",
+    "finalLink": "https://www.sec.gov/Archives/edgar/data/1326801/000132680124000012/meta-20231231.htm"
+  }
+]
