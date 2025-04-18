@@ -1,9 +1,3 @@
-![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
-![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
-![LangChain](https://img.shields.io/badge/LangChain-3178C6?style=for-the-badge&logo=langchain&logoColor=white)
-![CrewAI](https://img.shields.io/badge/CrewAI-FF5A5F?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDJMNCA4djhsOCA2bDgtNlY4bC04LTZ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-
 # 🚀 Agentic Explorer
 
 <div align="center">
@@ -12,18 +6,22 @@
 
 ### **An Interactive Playground for Financial Multi-Agent Systems**
 
-> *"In the world of AI agents, failure is just another data point. Unless it's catastrophic. Then it's a resume builder."*
+> *"Building a multi-agent system is like organizing a team of highly specialized experts who occasionally hallucinate their credentials."*
 
 ## 🧠 What Is This Thing?
 
-Agentic Explorer is an experimental framework for building, testing, and visualizing multi-agent LLM systems focused on financial analysis. It's a sandbox where you can:
+Agentic Explorer is an experimental framework for building, testing, and visualizing multi-agent LLM systems focused on extracting meaningful insights from unstructured data. We're tackling the signal-versus-noise challenge in operational decision making, using public company data as our proving ground.
 
-- Watch specialized AI agents collaborate to analyze financial news and stock data
-- See how different agent configurations affect analysis quality and cost
-- Experiment with deliberate "broken" agents to observe failure cascades
-- Learn practical lessons about multi-agent system design
+This framework serves as a sandbox where you can:
 
-Built on [CrewAI](https://github.com/crewai/crewai), this repo focuses on transparency and educational value rather than just getting the "right" answer. It's designed to reveal the inner workings of agent collaboration and help you understand the strengths and pitfalls of agentic systems.
+- Observe how specialized AI agents collaborate to transform unstructured data (earnings calls, SEC filings, news) into actionable insights
+- Measure how different agent configurations affect analysis quality, cost, and accuracy
+- Experiment with deliberately imperfect agents to understand system resilience
+- Visualize the inner workings of multi-agent systems to demystify how they actually function
+
+Using financial data as our test case (stock prices, earnings transcripts, SEC filings), we're exploring broader questions about how multi-agent systems can help organizations separate meaningful signals from market noise.
+
+Built on [CrewAI](https://github.com/crewai/crewai), this project prioritizes transparency and educational value over black-box solutions. By making every agent interaction visible and measurable, we're creating both a practical tool and a learning platform for understanding the true capabilities and limitations of collaborative AI.
 
 ## 💡 Why This Matters
 
@@ -51,43 +49,7 @@ The system deploys a customizable team of specialized agents:
 | **brokeAgent** | Deliberately introduces errors (for educational purposes) | Controlled failure demonstration |
 | **judgeAgent** | Evaluates all inputs & provides final assessment | Synthetic reasoning |
 
-## 🧪 Interactive Experiments
-
-Agentic Explorer supports several analysis types designed to showcase different aspects of multi-agent systems:
-
-### 1. Prediction Challenge
-
-Select a company, a date range, and a "prediction date" in the middle. Agents analyze data before the prediction date to forecast what will happen afterward, then validate against what actually occurred.
-
-```bash
-python run_explorer.py --company NVDA --start 2023-01-01 --predict 2023-06-15 --end 2023-12-31
-```
-
-### 2. Agent Configuration Comparisons
-
-Compare different agent combinations to see how team composition affects analysis quality and cost:
-
-```bash
-python run_explorer.py --company TSLA --start 2023-01-01 --end 2023-06-30 --compare basic,full,minimal
-```
-
-### 3. Failure Mode Simulations
-
-Introduce the brokeAgent with different error types to see how the system handles misinformation:
-
-```bash
-python run_explorer.py --company AAPL --start 2023-01-01 --end 2023-06-30 --broke-mode hallucination
-```
-
-### 4. Devil's Advocate Analysis
-
-Run analysis with and without the devilsAdvocateAgent to see how constructive disagreement affects conclusions:
-
-```bash
-python run_explorer.py --company MSFT --start 2023-01-01 --end 2023-06-30 --devils-advocate
-```
-
-## 📈 Token Economy Tracking
+## 📊 Token Economics & Agent Value
 
 A core feature is comprehensive token usage tracking and cost-benefit analysis:
 
@@ -111,27 +73,60 @@ A core feature is comprehensive token usage tracking and cost-benefit analysis:
 
 This enables you to quantify the contribution of each agent and optimize system cost-effectiveness.
 
-## 🔬 Implementation
+## 🔬 Core Application Modules
 
-### Data Organization
+Agentic Explorer offers several application modules that showcase different aspects of multi-agent systems:
 
-```
-dataStore/
-├── NVDA/
-│   ├── ticker_data.csv             # Daily price and volume data
-│   ├── filings/                    # 10-K, 10-Q and other SEC filings
-│   │   ├── 10K_2023.txt
-│   │   ├── 10Q_2023Q1.txt
-│   │   └── ...
-│   └── news/                       # News articles organized by date
-│       ├── 2023-01-05_article1.txt
-│       ├── 2023-01-08_article2.txt
-│       └── ...
-├── AAPL/
-│   └── ...
-└── market_data/
-    └── index_data.csv              # Market index data for reference
-```
+### 1. Company Deep Dive Analysis
+
+Select a company and time period for a comprehensive multi-agent analysis. See how different agents contribute unique insights about financial health, news impact, and market positioning. Watch in real-time as agents debate and refine their analysis.
+
+### 2. News Impact Validator
+
+Identify significant news events and validate their actual impact on company performance. Discover which news actually moved markets versus what was just noise. Get a "Reality Score" for each major news event's significance.
+
+### 3. Prediction Challenge Simulator
+
+Split timeline into "before" and "after" periods, with agents making predictions based on early data that are validated against later results. See which agents' predictions were most accurate and why.
+
+### 4. Agent Resilience Tester
+
+Deliberately introduce errors or biases to specific agents to see how the system's overall performance is affected. Learn how robust multi-agent systems handle misinformation and failure.
+
+### 5. Multi-Company Comparative Analysis
+
+Run the same analysis across multiple companies in a sector to identify shared patterns and company-specific insights. Discover hidden connections and divergences across competitors.
+
+## 🧪 Development Roadmap
+
+### Phase 1: Foundation (Current)
+
+- Project structure implementation (completed)
+- Data collection from financial sources (completed)
+- Core data management layer
+- Basic agent framework implementation
+- CrewAI integration
+- Company Deep Dive Analysis module (MVP)
+
+### Phase 2: Core Functionality
+
+- Complete agent ecosystem implementation
+- Prediction Challenge Simulator module
+- News Impact Validator module
+- Enhanced visualization capabilities
+- Token economy tracking system
+- Interactive UI foundation
+
+### Phase 3: Advanced Features
+
+- Agent Resilience Tester module
+- Multi-Company Comparative Analysis module
+- Advanced visualization dashboards
+- System optimization features
+- Comprehensive documentation
+- Case studies and examples
+
+## 🚀 Getting Started
 
 ### Installation
 
@@ -141,53 +136,71 @@ git clone https://github.com/Kris-Nale314/agentic-explorer.git
 cd agentic-explorer
 
 # Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Set up environment variables
-echo "OPENAI_API_KEY=your-api-key-here" > .env
+cp .env.example .env
+# Edit .env to add your API keys
 ```
 
-### Core Technical Features
+### Collecting Financial Data
 
-- **CrewAI Integration**: Leverages CrewAI for agent orchestration and collaboration
-- **Agent Interaction Logging**: Captures all inter-agent communications for review
-- **Visualization Dashboard**: Interactive visuals of agent contributions and workflow
-- **Configurable Analysis Types**: Multiple experiment templates built-in
-- **Failure Mode Simulations**: Controlled introduction of errors for educational purposes
+```bash
+# Run the data collector with interactive prompts
+python -m utils.run_data_collector
 
-## 🔮 Broader Applications
+# Or specify companies directly
+python -m utils.run_data_collector --tickers NVDA,MSFT,AAPL --years 3
+```
 
-While Agentic Explorer focuses on financial news analysis, the lessons learned have broader applications for any multi-agent LLM system, such as:
+### Running the Explorer
 
-### Real-time Monitoring Systems
+```bash
+# Launch the Streamlit interface
+streamlit run app.py
 
-The techniques demonstrated here could inform design considerations for "always-on" monitoring systems that continuously process information streams across domains.
+# Or run specific modules from command line
+python -m modules.deep_dive --company NVDA --start 2023-01-01 --end 2023-12-31
+```
 
-### Enterprise Decision Support
+## 📂 Project Structure
 
-Understanding agent collaboration patterns helps build more reliable decision support systems in areas like supply chain management, customer intelligence, and strategic planning.
-
-### Information Validation Frameworks
-
-The approach to error detection and validation provides insights for building more robust information processing pipelines in any domain.
-
-## 🧪 Future Development
-
-Planned enhancements include:
-
-- **Agent Specialization Evolution**: Agents that adapt their focus based on incoming data
-- **Interactive Agent Debugging**: Tools to isolate and fix agent reasoning errors
-- **Cross-domain Applications**: Extending the framework beyond financial analysis
-- **Advanced Visualization**: More detailed views of agent reasoning processes
-- **Custom Agent Creation**: Tools for users to design and deploy their own specialized agents
+```
+agentic-explorer/
+├── core/                          # Core system components
+│   ├── agents/                    # Agent implementations
+│   ├── models/                    # Analysis models
+│   └── tools/                     # Shared utilities for agents
+├── dataStore/                     # Financial data repository
+│   ├── NVDA/                      # Company-specific data
+│   ├── AAPL/                      # More company data
+│   └── market_data/               # Market indices and context
+├── modules/                       # Application modules
+│   ├── deep_dive.py               # Company Deep Dive Analysis
+│   ├── news_validator.py          # News Impact Validator
+│   ├── prediction_challenge.py    # Prediction Challenge Simulator
+│   ├── resilience_tester.py       # Agent Resilience Tester
+│   └── comparative_analysis.py    # Multi-Company Comparative Analysis
+├── utils/                         # Utility functions
+│   ├── data_collector.py          # Financial data collection
+│   └── visualization.py           # Visualization helpers
+├── pages/                         # Streamlit pages
+├── outputs/                       # Analysis outputs and logs
+├── app.py                         # Main Streamlit application
+└── project_structure.py           # Project structure utilities
+```
 
 ## 📚 Contributing
 
-Contributions welcome! 
+Contributions welcome! Check out the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
+
+- **Bug reports**: File under Issues
+- **Feature requests**: Start a discussion
+- **Code contributions**: Submit a PR
 
 ## 📜 License
 
@@ -195,8 +208,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Built while searching for meaning in stochastic parrots by Kris Naleszkiewicz | [LinkedIn](https://www.linkedin.com/in/kris-nale314/) | [Medium](https://medium.com/@kris_nale314)*
+*Built while convincing LLMs to play nicely together by Kris Naleszkiewicz | [LinkedIn](https://www.linkedin.com/in/kris-nale314/) | [Medium](https://medium.com/@kris_nale314)*
 
 <div align="center">
-  <i>"If you're not slightly embarrassed by your first multi-agent system, you waited too long to release it."</i>
+  <i>"The most unrealistic part of sci-fi AI isn't the intelligence, it's the cooperation."</i>
 </div>
