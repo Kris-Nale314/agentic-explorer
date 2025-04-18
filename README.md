@@ -1,104 +1,143 @@
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 ![LangChain](https://img.shields.io/badge/LangChain-3178C6?style=for-the-badge&logo=langchain&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![CrewAI](https://img.shields.io/badge/CrewAI-FF5A5F?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDJMNCA4djhsOCA2bDgtNlY4bC04LTZ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-#           🚀 Agentic Explorer
+# 🚀 Agentic Explorer
 
 <div align="center">
   <img src="docs/images/agentic_explorer_logo.svg" alt="Agentic Explorer Logo" width="400" height="400">
 </div>
 
-### **Diving into the Architectural Underpinnings of Agentic Systems**
+### **An Interactive Playground for Financial Multi-Agent Systems**
 
-## 💡 Core Concept - Why is everyone talking about Agentic AI
+> *"In the world of AI agents, failure is just another data point. Unless it's catastrophic. Then it's a resume builder."*
 
-Retrieval-Augmented Generation (RAG) systems enhance large language models (LLMs) by feeding them relevant external information. However, traditional RAG systems often fall short—not due to LLM limitations but because of how they retrieve and integrate information. Many of these systems struggle to understand the structure and context of documents, which can lead to confusing or inaccurate responses.
+## 🧠 What Is This Thing?
 
-Agentic Explorer is a platform designed to showcase the differences between traditional and agentic RAG approaches. It provides a transparent look at how each method handles document structure, context, and retrieval strategies. The goal is to highlight why a deeper understanding of document architecture can make or break RAG performance.
+Agentic Explorer is an experimental framework for building, testing, and visualizing multi-agent LLM systems focused on financial analysis. It's a sandbox where you can:
 
-> *"Your data strategy is as important as your solution architecture."*
+- Watch specialized AI agents collaborate to analyze financial news and stock data
+- See how different agent configurations affect analysis quality and cost
+- Experiment with deliberate "broken" agents to observe failure cascades
+- Learn practical lessons about multi-agent system design
 
-This concept isn't just theoretical—it has real-world implications for building reliable, production-ready AI systems.
+Built on [CrewAI](https://github.com/crewai/crewai), this repo focuses on transparency and educational value rather than just getting the "right" answer. It's designed to reveal the inner workings of agent collaboration and help you understand the strengths and pitfalls of agentic systems.
 
+## 💡 Why This Matters
 
-## 🔥 Significance and Problem Statement
+Multi-agent LLM systems are increasingly common in enterprise settings, but their inner workings often remain a black box. This can lead to:
 
-Agentic Explorer is designed to highlight these critical challenges, which can be categorized as the "Four Horsemen of the RAG Apocalypse":
+- Unpredictable failure modes
+- Unclear cost-benefit tradeoffs
+- Difficulty diagnosing issues
+- Challenges in system optimization
 
-- **Boundary Disregard**: Traditional chunking methods often break documents into pieces without respecting natural boundaries (e.g., sections, paragraphs). This random segmentation can lead to lost context and garbled responses.
+Agentic Explorer provides a transparent view into how these systems work, using financial news analysis as a concrete and intuitive example. By making agent interactions visible and measurable, it demystifies the "magic" of collaborative AI.
 
-- **Entity Contextual Amnesia**:  When traditional RAGs move between document chunks, they often lose track of important entities and their evolving context. This can result in inconsistent and inaccurate references throughout generated responses.
+## 🤖 The Agent Ecosystem
 
-- **Conceptual Fragmentation**:  Semantically related ideas that get separated across arbitrary chunks can become isolated. Traditional RAGs often struggle to reconnect these fragments into a coherent understanding.
+The system deploys a customizable team of specialized agents:
 
-- **Temporal Contextual Disorientation**:  Ignoring temporal cues in documents can lead to confusion about the sequence of events or the timing of information. This is especially problematic for queries that depend on chronological accuracy.
+| Agent | Function | Special Power |
+|-------|----------|---------------|
+| **strategyAgent** | Designs analysis workflow & coordinates team | Meta-cognition |
+| **newsAgent** | Analyzes news sentiment & extracts claims | Language pattern recognition |
+| **tickerAgent** | Processes stock price movements & volumes | Numerical correlation detection |
+| **secAgent** | Reviews SEC filings & company disclosures | Regulatory interpretation |
+| **industryAgent** | Provides sector context & competitive analysis | Comparative reasoning |
+| **devilsAdvocateAgent** | Challenges mainstream analysis & assumptions | Contrarian thinking |
+| **brokeAgent** | Deliberately introduces errors (for educational purposes) | Controlled failure demonstration |
+| **judgeAgent** | Evaluates all inputs & provides final assessment | Synthetic reasoning |
 
-By making these architectural differences visible and measurable, Agentic Explorer aims to elevate the conversation around RAG systems and provide a blueprint for building smarter, more resilient AI solutions.
+## 🧪 Interactive Experiments
 
-## 🧠 Meet The Processors
+Agentic Explorer supports several analysis types designed to showcase different aspects of multi-agent systems:
 
-Agentic Explorer is built around modular processors that can be composed in both traditional and agentic configurations:
+### 1. Prediction Challenge
 
-| Processor | Purpose | What It Reveals |
-|-----------|---------|----------------|
-| **DocumentProcessor** | Analyzes document structure and content | Complexity factors that affect RAG performance |
-| **ChunkingProcessor** | Slices documents into retrievable pieces | How intelligent boundaries preserve context |
-| **EmbeddingProcessor** | Generates vector representations | Efficiency of different embedding approaches |  
-| **IndexProcessor** | Manages vector database operations | Storage and retrieval mechanics |
-| **RetrievalProcessor** | Finds relevant chunks for queries | How entity-aware search outperforms basic similarity |
-| **SummarizationProcessor** | Creates different summary types | How summary strategy affects understanding |
-| **SynthesisProcessor** | Combines retrieved info into answers | Why multi-agent synthesis reduces hallucinations |
+Select a company, a date range, and a "prediction date" in the middle. Agents analyze data before the prediction date to forecast what will happen afterward, then validate against what actually occurred.
 
-## 🤖 The Agentic Approach
-
-At its core, "agentic AI" means breaking down complex tasks into specialized roles rather than expecting a single model to do everything. Instead of one overwhelmed LLM, we create a team of specialized agents that each handle a specific aspect of the problem:
-
-| Agent | Based On | Responsibility |
-|-------|----------|----------------|
-| **Boundary Detective** | ChunkingProcessor | Identifies natural document transitions |
-| **Entity Tracker** | RetrievalProcessor | Disambiguates and tracks entities across chunks |
-| **Context Connector** | RetrievalProcessor | Finds relationships between information fragments |
-| **Research Analyst** | SynthesisProcessor | Extracts and evaluates relevant facts |
-| **Information Synthesizer** | SynthesisProcessor | Creates coherent responses from fragmented information |
-| **Quality Controller** | SynthesisProcessor | Evaluates factual accuracy and completeness |
-
-Each agent is a lightweight wrapper around our processors, adding specialized prompting and decision-making. This approach represents both a practical architecture and an educational metaphor - breaking down complex systems into understandable components mirrors how human teams tackle difficult problems.
-
-## 🔬 Technical Approach
-
-### File Structure
-
-```
-agentic-explorer/
-├── processors/
-│   ├── __init__.py 
-│   ├── chunking.py         # Chunking strategies (fixed-size vs. boundary-aware)
-│   ├── document.py         # Document analysis and metrics
-│   ├── embedding.py        # Vector embedding generation 
-│   ├── index.py            # Vector storage (ChromaDB or in-memory)
-│   ├── retrieval.py        # Search methods (vector, entity-aware, hybrid)
-│   ├── summarize.py        # Multi-strategy summarization
-│   └── synthesis.py        # Response generation approaches
-├── utils/
-│   ├── __init__.py
-│   └── openai_client.py    # OpenAI API wrapper
-├── analysis.py             # Core analysis pipeline
-├── orchestration.py        # Workflow coordination
-├── run_demo.py             # CLI interface
-├── config.py               # Configuration management
-├── requirements.txt        # Dependencies
-└── README.md               # You are here
+```bash
+python run_explorer.py --company NVDA --start 2023-01-01 --predict 2023-06-15 --end 2023-12-31
 ```
 
-## 🚀 Getting Started
+### 2. Agent Configuration Comparisons
+
+Compare different agent combinations to see how team composition affects analysis quality and cost:
+
+```bash
+python run_explorer.py --company TSLA --start 2023-01-01 --end 2023-06-30 --compare basic,full,minimal
+```
+
+### 3. Failure Mode Simulations
+
+Introduce the brokeAgent with different error types to see how the system handles misinformation:
+
+```bash
+python run_explorer.py --company AAPL --start 2023-01-01 --end 2023-06-30 --broke-mode hallucination
+```
+
+### 4. Devil's Advocate Analysis
+
+Run analysis with and without the devilsAdvocateAgent to see how constructive disagreement affects conclusions:
+
+```bash
+python run_explorer.py --company MSFT --start 2023-01-01 --end 2023-06-30 --devils-advocate
+```
+
+## 📈 Token Economy Tracking
+
+A core feature is comprehensive token usage tracking and cost-benefit analysis:
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                 Agent Token Economy Dashboard                     │
+├────────────────┬───────────┬─────────┬────────────┬──────────────┤
+│ Agent          │ Tokens    │ Cost($) │ Insights   │ Value/Token  │
+├────────────────┼───────────┼─────────┼────────────┼──────────────┤
+│ strategyAgent  │ 14,231    │ $0.28   │ (meta)     │ ⚙️ Orchestr. │
+│ newsAgent      │ 28,450    │ $0.57   │ 12         │ ★★★★☆        │
+│ tickerAgent    │ 15,230    │ $0.30   │ 8          │ ★★★☆☆        │
+│ secAgent       │ 31,520    │ $0.63   │ 15         │ ★★★★★        │
+│ industryAgent  │ 22,860    │ $0.46   │ 9          │ ★★☆☆☆        │
+│ devilsAdvAgent │ 18,940    │ $0.38   │ 7          │ ★★★★☆        │
+│ judgeAgent     │ 35,760    │ $0.72   │ 18         │ ★★★★★        │
+├────────────────┼───────────┼─────────┼────────────┼──────────────┤
+│ Total          │ 166,991   │ $3.34   │ 69         │ ★★★★☆        │
+└────────────────┴───────────┴─────────┴────────────┴──────────────┘
+```
+
+This enables you to quantify the contribution of each agent and optimize system cost-effectiveness.
+
+## 🔬 Implementation
+
+### Data Organization
+
+```
+dataStore/
+├── NVDA/
+│   ├── ticker_data.csv             # Daily price and volume data
+│   ├── filings/                    # 10-K, 10-Q and other SEC filings
+│   │   ├── 10K_2023.txt
+│   │   ├── 10Q_2023Q1.txt
+│   │   └── ...
+│   └── news/                       # News articles organized by date
+│       ├── 2023-01-05_article1.txt
+│       ├── 2023-01-08_article2.txt
+│       └── ...
+├── AAPL/
+│   └── ...
+└── market_data/
+    └── index_data.csv              # Market index data for reference
+```
 
 ### Installation
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/agentic-explorer.git
+git clone https://github.com/Kris-Nale314/agentic-explorer.git
 cd agentic-explorer
 
 # Create a virtual environment
@@ -112,68 +151,52 @@ pip install -r requirements.txt
 echo "OPENAI_API_KEY=your-api-key-here" > .env
 ```
 
-### Running the Demo
+### Core Technical Features
 
-```bash
-# Basic RAG showdown
-python run_demo.py --document data/samples/mixed_earnings.txt
+- **CrewAI Integration**: Leverages CrewAI for agent orchestration and collaboration
+- **Agent Interaction Logging**: Captures all inter-agent communications for review
+- **Visualization Dashboard**: Interactive visuals of agent contributions and workflow
+- **Configurable Analysis Types**: Multiple experiment templates built-in
+- **Failure Mode Simulations**: Controlled introduction of errors for educational purposes
 
-# With document understanding phase
-python run_demo.py --document data/samples/mixed_earnings.txt --summaries
+## 🔮 Broader Applications
 
-# Custom query
-python run_demo.py --document your_file.txt --query "Compare the financial performance of Apple and Microsoft"
-```
+While Agentic Explorer focuses on financial news analysis, the lessons learned have broader applications for any multi-agent LLM system, such as:
 
-## 🧪 Development Notes
+### Real-time Monitoring Systems
 
-### Adding New Strategies
+The techniques demonstrated here could inform design considerations for "always-on" monitoring systems that continuously process information streams across domains.
 
-Agentic Explorer is designed for extensibility. To add a new chunking, retrieval, or synthesis strategy:
+### Enterprise Decision Support
 
-1. Add the strategy implementation to the appropriate processor
-2. Update the `compare_*` methods to include your strategy
-3. Implement any necessary evaluation metrics
+Understanding agent collaboration patterns helps build more reliable decision support systems in areas like supply chain management, customer intelligence, and strategic planning.
 
-### Metrics Schema
+### Information Validation Frameworks
 
-The project uses a standardized metrics schema for visualization and comparison:
+The approach to error detection and validation provides insights for building more robust information processing pipelines in any domain.
 
-```python
-{
-  "comparison_type": "string",
-  "compared_entities": [
-    {
-      "name": "string",
-      "description": "string",
-      "metrics": {
-        "metric_name": {
-          "value": number,
-          "display_format": "string",
-          "visualization_hint": "string",
-          "interpretation": "string"
-        }
-      }
-    }
-  ]
-}
-```
+## 🧪 Future Development
 
-## 🔮 Future Work
+Planned enhancements include:
 
-- **Interactive Visualizations**: Clickable nodes showing agent interaction graphs
-- **Challenge Document Set**: Curated examples that break traditional RAG in educational ways
-- **Hybrid Strategy Development**: Best-of-both-worlds approaches for different document types
-- **Streaming Agent Thinking**: Real-time visualization of agent reasoning
+- **Agent Specialization Evolution**: Agents that adapt their focus based on incoming data
+- **Interactive Agent Debugging**: Tools to isolate and fix agent reasoning errors
+- **Cross-domain Applications**: Extending the framework beyond financial analysis
+- **Advanced Visualization**: More detailed views of agent reasoning processes
+- **Custom Agent Creation**: Tools for users to design and deploy their own specialized agents
+
+## 📚 Contributing
+
+Contributions welcome! 
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-*Built while surviving on coffee by Kris Naleszkiewicz | [LinkedIn](https://www.linkedin.com/in/kris-nale314/) | [Medium](https://medium.com/@kris_nale314)*
+*Built while searching for meaning in stochastic parrots by Kris Naleszkiewicz | [LinkedIn](https://www.linkedin.com/in/kris-nale314/) | [Medium](https://medium.com/@kris_nale314)*
 
 <div align="center">
-  <i>"The problem isn't that AI hallucinates - it's that we're hallucinating about how AI works."</i>
+  <i>"If you're not slightly embarrassed by your first multi-agent system, you waited too long to release it."</i>
 </div>
