@@ -4,7 +4,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-# 🚀 Agentic Explorer
+#           🚀 Agentic Explorer
 
 <div align="center">
   <img src="docs/images/agentic_explorer_logo.svg" alt="Agentic Explorer Logo" width="400" height="400">
