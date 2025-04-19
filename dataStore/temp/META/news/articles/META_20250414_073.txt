@@ -1,6 +1,0 @@
-Title: Meta to use public posts, AI interactions to train models in EU
-Date: 2025-04-14 13:23:39
-Source: reuters.com
-URL: https://www.reuters.com/technology/artificial-intelligence/meta-use-public-posts-ai-interactions-train-models-eu-2025-04-14/
-
-Meta Platforms said on Monday it would use interactions that users have with its AI, as well as public posts and comments shared by adults across its platforms, to train its artificial intelligence models in the European Union.

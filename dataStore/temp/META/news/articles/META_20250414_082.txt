@@ -1,6 +1,0 @@
-Title: Meta to start training its AI models on public content in the EU
-Date: 2025-04-14 11:03:57
-Source: techcrunch.com
-URL: https://techcrunch.com/2025/04/14/meta-to-start-training-its-ai-models-on-public-content-in-the-eu/
-
-Meta announced on Monday that it's going to train its AI models on public content, such as posts and comments on Facebook and Instagram, in the EU after previously pausing its plans to do so in response to regulatory pressure due to to data privacy concerns. The company will start training its AI on users' content in the EU this week, it said.

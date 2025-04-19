@@ -1,6 +1,0 @@
-Title: Meta to Begin Training AI on User Data in EU
-Date: 2025-04-14 13:30:25
-Source: pymnts.com
-URL: https://www.pymnts.com/news/artificial-intelligence/2025/meta-begin-training-ai-user-data-european-union/
-
-Meta will begin using content shared by adults in the European Union to train its artificial intelligence models after the European Data Protection Board said the company's approach met its legal requirements.

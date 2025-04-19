@@ -1,6 +1,0 @@
-Title: Chip Shares Tumble After Nvidia Discloses Export Restrictions
-Date: 2025-04-16 10:02:00
-Source: wsj.com
-URL: https://www.wsj.com/tech/chip-shares-tumble-after-nvidia-discloses-export-restrictions-b76a6755
-
-Export restrictions placed on certain chips manufactured by Nvidia have weighed on other chipmakers, and shares of Broadcom, Qualcomm and others declined.

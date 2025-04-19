@@ -1,6 +1,0 @@
-Title: Nvidia probed over how its chips may have been obtained by DeepSeek, which US lawmakers accused of spying for China
-Date: 2025-04-16 19:13:19
-Source: businessinsider.com
-URL: https://www.businessinsider.com/lawmakers-deepseek-spying-china-nvidia-probed-chips-2025-4
-
-US lawmakers are looking into how DeepSeek may have gotten Nvidia chips despite export controls. They also accused DeepSeek of funneling American user data to the Chinese government.

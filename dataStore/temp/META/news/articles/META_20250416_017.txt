@@ -1,6 +1,0 @@
-Title: Meta to start using Europeans' data for AI training May 27
-Date: 2025-04-16 16:00:03
-Source: techxplore.com
-URL: https://techxplore.com/news/2025-04-meta-europeans-ai.html
-
-Meta will start using public posts and comments by its European users to train generative artificial intelligence (AI) models from May 27, unless users opt out of the data-mining project.

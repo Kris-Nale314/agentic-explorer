@@ -1,6 +1,0 @@
-Title: NVDA vs. AMD: Which Semiconductor Stock is the Smarter AI Play in 2025?
-Date: 2025-04-17 16:00:33
-Source: zacks.com
-URL: https://www.zacks.com/stock/news/2451005/nvda-vs-amd-which-semiconductor-stock-is-the-smarter-ai-play-in-2025?cid=CS-STOCKNEWSAPI-FT-analyst_blog|most_popular_stocks-2451005
-
-NVIDIA Corporation NVDA and Advanced Micro Devices, Inc. AMD are at the center of the artificial intelligence (AI) hardware boom. Both companies make the graphics processing units (GPUs) and AI accelerators that train large language models, power cloud servers and drive modern computing.
