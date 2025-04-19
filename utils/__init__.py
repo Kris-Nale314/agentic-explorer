@@ -1,5 +1,5 @@
 # utils/__init__.py
-from utils.data_collector import fetch_all_data, fetch_data_for_companies
+from utils.data_collector import collect_all_data
 
 # core/__init__.py
 # Core package initialization

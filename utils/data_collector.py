@@ -1,8 +1,8 @@
 """
-DataStore Population Scripts for Agentic Explorer
+Enhanced data collection script for SignalStore
 
 This module contains functions to collect and organize financial data
-from FMP API into the project's DataStore structure.
+using the FMP API into the project's enhanced DataStore structure.
 """
 
 import os
@@ -13,48 +13,46 @@ import pandas as pd
 import requests
 from dotenv import load_dotenv
 from rich.console import Console
-from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, SpinnerColumn
-from tqdm import tqdm
-
-# Import project structure utilities
-from project_structure import get_project_root, get_data_path
+from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn
 
 # Load environment variables
 load_dotenv()
 FMP_API_KEY = os.getenv("FMP_API_KEY")
 BASE_URL = "https://financialmodelingprep.com/api/v3"
+BASE_URL_V4 = "https://financialmodelingprep.com/api/v4"
 
-# Initialize Rich console
+# Initialize console
 console = Console()
 
-def ensure_directories(ticker):
-    """Create necessary directories for a ticker if they don't exist."""
-    base_dir = get_data_path(ticker)
-    
-    # Create main directories
-    directories = [
-        base_dir,
-        base_dir / "financials",
-        base_dir / "filings" / "full_texts",
-        base_dir / "earnings" / "transcripts",
-        base_dir / "news" / "articles"
+def ensure_datastore_structure():
+    """Create the base SignalStore dataStore structure."""
+    # Define base directories
+    base_dirs = [
+        "dataStore/companies",
+        "dataStore/market",
+        "dataStore/events",
+        "dataStore/relationships",
+        "dataStore/signals/cost_pressure",
+        "dataStore/signals/revenue_vulnerability", 
+        "dataStore/signals/market_environment"
     ]
     
-    for directory in directories:
-        directory.mkdir(parents=True, exist_ok=True)
+    # Create directories
+    for directory in base_dirs:
+        os.makedirs(directory, exist_ok=True)
     
-    # Also ensure market_data directory exists
-    get_data_path("market_data").mkdir(parents=True, exist_ok=True)
-    
-    return base_dir
+    console.log("DataStore structure created")
 
-def fmp_request(endpoint, params=None):
+def fmp_request(endpoint, params=None, version="v3"):
     """Make a request to FMP API with error handling and rate limiting."""
     if params is None:
         params = {}
     
     params["apikey"] = FMP_API_KEY
-    url = f"{BASE_URL}/{endpoint}"
+    
+    # Select base URL based on version
+    base_url = BASE_URL if version == "v3" else BASE_URL_V4
+    url = f"{base_url}/{endpoint}"
     
     try:
         response = requests.get(url, params=params)
@@ -68,61 +66,75 @@ def fmp_request(endpoint, params=None):
         console.log(f"Error in API request to {endpoint}: {e}")
         return None
 
-def fetch_company_profile(ticker):
-    """Fetch and save company profile information."""
-    console.log(f"Fetching company profile for {ticker}")
+# Company data collection functions
+def collect_company_profile(ticker):
+    """Collect and save company profile data."""
+    console.log(f"Collecting profile data for {ticker}")
     
     data = fmp_request(f"profile/{ticker}")
-    if not data:
-        return False
-    
-    profile_path = get_data_path(ticker) / "profile.json"
-    with open(profile_path, "w") as f:
-        json.dump(data, f, indent=2)
-    
-    console.log(f"Saved company profile for {ticker}")
-    return True
+    if data and len(data) > 0:
+        # Save as JSON for human readability
+        os.makedirs(f"dataStore/companies/{ticker}", exist_ok=True)
+        with open(f"dataStore/companies/{ticker}/profile.json", "w") as f:
+            json.dump(data[0], f, indent=2)
+        
+        console.log(f"Profile data saved for {ticker}")
+        return True
+    return False
 
-def fetch_financial_statements(ticker, years=5):
-    """Fetch and save financial statements."""
+def collect_company_financials(ticker, years=3):
+    """Collect and save company financial statements."""
+    console.log(f"Collecting financial data for {ticker}")
+    
+    # Define statement types to collect
     statement_types = {
-        "income-statement": "income",
-        "balance-sheet-statement": "balance",
-        "cash-flow-statement": "cashflow"
+        "income-statement": "Income Statement",
+        "balance-sheet-statement": "Balance Sheet",
+        "cash-flow-statement": "Cash Flow",
+        "key-metrics": "Key Metrics",
+        "ratios": "Financial Ratios"
     }
     
-    with Progress(
-        SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
-        BarColumn(),
-        TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-        TimeElapsedColumn(),
-    ) as progress:
-        task = progress.add_task(f"Fetching financial statements for {ticker}", total=len(statement_types) * 2)
-        
-        for endpoint, name in statement_types.items():
-            # Fetch quarterly statements
-            quarterly_data = fmp_request(f"{endpoint}/{ticker}", {"period": "quarter", "limit": years * 4})
-            if quarterly_data:
-                quarterly_path = get_data_path(ticker) / "financials" / f"quarterly_{name}.json"
-                with open(quarterly_path, "w") as f:
-                    json.dump(quarterly_data, f, indent=2)
-            progress.update(task, advance=1)
-                
-            # Fetch annual statements
-            annual_data = fmp_request(f"{endpoint}/{ticker}", {"limit": years})
-            if annual_data:
-                annual_path = get_data_path(ticker) / "financials" / f"annual_{name}.json"
-                with open(annual_path, "w") as f:
-                    json.dump(annual_data, f, indent=2)
-            progress.update(task, advance=1)
+    # Create DataFrame to store all financial data
+    all_financials = pd.DataFrame()
     
-    console.log(f"Financial statements saved for {ticker}")
-    return True
+    for endpoint, name in statement_types.items():
+        # Collect quarterly data
+        quarterly = fmp_request(f"{endpoint}/{ticker}", {"period": "quarter", "limit": years * 4})
+        
+        if quarterly:
+            # Convert to DataFrame
+            df = pd.DataFrame(quarterly)
+            df['statement_type'] = name
+            df['period_type'] = 'quarterly'
+            
+            # Append to main DataFrame
+            all_financials = pd.concat([all_financials, df])
+        
+        # Collect annual data
+        annual = fmp_request(f"{endpoint}/{ticker}", {"limit": years})
+        
+        if annual:
+            # Convert to DataFrame
+            df = pd.DataFrame(annual)
+            df['statement_type'] = name
+            df['period_type'] = 'annual'
+            
+            # Append to main DataFrame
+            all_financials = pd.concat([all_financials, df])
+    
+    # Save all financial data as parquet file
+    if not all_financials.empty:
+        os.makedirs(f"dataStore/companies/{ticker}", exist_ok=True)
+        all_financials.to_parquet(f"dataStore/companies/{ticker}/financials.parquet", engine='pyarrow')
+        console.log(f"Financial data saved for {ticker}")
+        return True
+    
+    return False
 
-def fetch_historical_prices(ticker, years=5):
-    """Fetch and save historical stock prices."""
-    console.log(f"Fetching historical prices for {ticker}")
+def collect_historical_prices(ticker, years=3):
+    """Collect and save historical stock prices."""
+    console.log(f"Collecting price data for {ticker}")
     
     end_date = datetime.now()
     start_date = end_date - timedelta(days=365 * years)
@@ -132,284 +144,390 @@ def fetch_historical_prices(ticker, years=5):
         "to": end_date.strftime("%Y-%m-%d")
     })
     
-    if not data or "historical" not in data:
-        console.log(f"No historical data found for {ticker}")
-        return False
-    
-    # Convert to DataFrame for easier processing
-    df = pd.DataFrame(data["historical"])
-    
-    # Save to company directory for individual access
-    prices_path = get_data_path(ticker) / "historical_prices.csv"
-    df.to_csv(prices_path, index=False)
-    
-    # Also append to the combined market data file
-    market_data_path = get_data_path("market_data") / "daily_prices.csv"
-    
-    # Add ticker column
-    df["ticker"] = ticker
-    
-    # If the combined file exists, append; otherwise create new
-    if market_data_path.exists():
-        # Read existing data
-        existing_data = pd.read_csv(market_data_path)
+    if data and "historical" in data:
+        # Convert to DataFrame
+        df = pd.DataFrame(data["historical"])
+        df['ticker'] = ticker
         
-        # Remove any existing data for this ticker
-        existing_data = existing_data[existing_data.ticker != ticker]
+        # Save as parquet file
+        os.makedirs(f"dataStore/companies/{ticker}", exist_ok=True)
+        df.to_parquet(f"dataStore/companies/{ticker}/prices.parquet", engine='pyarrow')
         
-        # Append new data
-        updated_data = pd.concat([existing_data, df])
-        updated_data.to_csv(market_data_path, index=False)
-    else:
-        df.to_csv(market_data_path, index=False)
+        console.log(f"Price data saved for {ticker}")
+        return True
     
-    console.log(f"Historical prices saved for {ticker}")
-    return True
+    return False
 
-def fetch_sec_filings(ticker, years=5):
-    """Fetch and save SEC filings metadata and important full texts."""
-    console.log(f"Fetching SEC filings for {ticker}")
+def collect_earnings_data(ticker, quarters=12):
+    """Collect earnings history and call transcripts."""
+    console.log(f"Collecting earnings data for {ticker}")
     
-    # Get all filings
-    filings = fmp_request(f"sec_filings/{ticker}", {"limit": 500})
-    if not filings:
-        return False
-    
-    # Organize by type
-    filing_types = {"10-K": [], "10-Q": [], "8-K": []}
-    
-    for filing in filings:
-        if filing["type"] in filing_types:
-            filing_types[filing["type"]].append(filing)
-    
-    # Save metadata by type
-    for filing_type, items in filing_types.items():
-        clean_type = filing_type.replace("-", "")
-        with open(get_data_path(ticker) / "filings" / f"{clean_type}_filings.json", "w") as f:
-            json.dump(items, f, indent=2)
-    
-    # For important filings (10-K, 10-Q), fetch the full text for the most recent ones
-    important_filings = []
-    for filing_type in ["10-K", "10-Q"]:
-        for filing in filing_types[filing_type][:years]:
-            important_filings.append((filing_type, filing))
-    
-    # Limited to the most recent years of each important filing
-    console.log(f"Downloading {len(important_filings)} full text filings for {ticker}")
-    
-    for filing_type, filing in tqdm(important_filings, desc="Downloading filings"):
-        try:
-            # Extract year and quarter if applicable
-            filing_date = filing.get("fillingDate", "")
-            year = "unknown"
-            
-            # Handle different date formats
-            if filing_date:
-                # Strip any time component if present
-                if " " in filing_date:
-                    filing_date = filing_date.split(" ")[0]
-                
-                # Extract year safely
-                date_parts = filing_date.split("-")
-                if len(date_parts) >= 1 and len(date_parts[0]) == 4:
-                    year = date_parts[0]
-            
-            if filing_type == "10-Q":
-                # Try to determine which quarter
-                quarter = "Q?"
-                
-                try:
-                    if filing_date:
-                        # Parse the date safely
-                        date_obj = datetime.strptime(filing_date, "%Y-%m-%d")
-                        month = date_obj.month
-                        
-                        if month <= 3:
-                            quarter = "Q1"
-                        elif month <= 6:
-                            quarter = "Q2"
-                        elif month <= 9:
-                            quarter = "Q3"
-                        else:
-                            quarter = "Q4"
-                except ValueError as e:
-                    console.log(f"Warning: Could not parse date '{filing_date}': {e}")
-                
-                filename = f"{clean_type}_{year}{quarter}.txt"
-            else:
-                filename = f"{clean_type}_{year}.txt"
-            
-            # Try to get the document text
-            if "finalLink" in filing:
-                try:
-                    response = requests.get(filing["finalLink"], timeout=30)
-                    if response.status_code == 200:
-                        filing_text = response.text
-                        with open(get_data_path(ticker) / "filings" / "full_texts" / filename, "w", encoding="utf-8") as f:
-                            f.write(filing_text)
-                except Exception as e:
-                    console.log(f"Error downloading {filing_type} for {ticker}: {e}")
-        except Exception as e:
-            console.log(f"Error processing {filing_type} for {ticker}: {e}")
-            continue
-    
-    console.log(f"SEC filings saved for {ticker}")
-    return True
-
-def fetch_earnings_data(ticker, quarters=8):
-    """Fetch and save earnings data and transcripts."""
-    console.log(f"Fetching earnings data for {ticker}")
-    
-    # Get earnings history
+    # Collect earnings history
     earnings_history = fmp_request(f"historical/earning_calendar/{ticker}", {"limit": quarters})
+    
     if earnings_history:
-        with open(get_data_path(ticker) / "earnings" / "earnings_history.json", "w") as f:
-            json.dump(earnings_history, f, indent=2)
+        # Convert to DataFrame
+        df = pd.DataFrame(earnings_history)
+        
+        # Save as parquet file
+        os.makedirs(f"dataStore/companies/{ticker}", exist_ok=True)
+        df.to_parquet(f"dataStore/companies/{ticker}/earnings.parquet", engine='pyarrow')
     
-    # Get earnings estimates
-    earnings_estimates = fmp_request(f"earnings-calendar-confirmed/{ticker}")
-    if earnings_estimates:
-        with open(get_data_path(ticker) / "earnings" / "earnings_estimates.json", "w") as f:
-            json.dump(earnings_estimates, f, indent=2)
+    # Collect earnings call transcripts
+    transcripts = []
     
-    # Get earnings call transcripts for recent quarters
-    for i in range(quarters):
-        # Try to get transcript
+    for i in range(min(quarters, 12)):  # Limit to reasonable number
         transcript = fmp_request(f"earning_call_transcript/{ticker}", {"quarter": i + 1})
+        
         if transcript and len(transcript) > 0:
-            # Extract quarter and year
-            quarter = transcript[0].get("quarter", "Q?")
-            year = transcript[0].get("year", "YYYY")
-            
-            filename = f"{ticker}_{year}{quarter}.txt"
-            with open(get_data_path(ticker) / "earnings" / "transcripts" / filename, "w", encoding="utf-8") as f:
-                f.write(transcript[0].get("content", "No transcript content available"))
+            # Extract transcript data
+            transcripts.append({
+                'ticker': ticker,
+                'quarter': transcript[0].get('quarter'),
+                'year': transcript[0].get('year'),
+                'date': transcript[0].get('date'),
+                'content': transcript[0].get('content', '')
+            })
+    
+    if transcripts:
+        # Convert to DataFrame
+        df = pd.DataFrame(transcripts)
+        
+        # Save as parquet file
+        df.to_parquet(f"dataStore/companies/{ticker}/transcripts.parquet", engine='pyarrow')
     
     console.log(f"Earnings data saved for {ticker}")
     return True
 
-def fetch_news_and_sentiment(ticker, articles_limit=100):
-    """Fetch and save news articles and sentiment data."""
-    console.log(f"Fetching news and sentiment for {ticker}")
+def collect_sec_filings(ticker, years=3):
+    """Collect SEC filing metadata."""
+    console.log(f"Collecting SEC filing data for {ticker}")
+    
+    # Get filing metadata
+    filings = fmp_request(f"sec_filings/{ticker}", {"limit": years * 20})  # Approximation
+    
+    if filings:
+        # Convert to DataFrame
+        df = pd.DataFrame(filings)
+        
+        # Save as parquet file
+        os.makedirs(f"dataStore/companies/{ticker}", exist_ok=True)
+        df.to_parquet(f"dataStore/companies/{ticker}/filings.parquet", engine='pyarrow')
+        
+        console.log(f"SEC filing data saved for {ticker}")
+        return True
+    
+    return False
+
+def collect_company_news(ticker, limit=100):
+    """Collect company news articles."""
+    console.log(f"Collecting news data for {ticker}")
     
     # Get news articles
-    news = fmp_request("stock_news", {"tickers": ticker, "limit": articles_limit})
+    news = fmp_request("stock_news", {"tickers": ticker, "limit": limit})
+    
     if news:
-        # Save metadata
-        with open(get_data_path(ticker) / "news" / "news_metadata.json", "w") as f:
-            json.dump(news, f, indent=2)
+        # Convert to DataFrame
+        df = pd.DataFrame(news)
         
-        # Save individual articles
-        for i, article in enumerate(news):
-            # Create a filename based on date and index
-            date_str = article.get("publishedDate", "").split(" ")[0].replace("-", "")
-            filename = f"{ticker}_{date_str}_{i:03d}.txt"
-            
-            # Save article content
-            article_path = get_data_path(ticker) / "news" / "articles" / filename
-            with open(article_path, "w", encoding="utf-8") as f:
-                f.write(f"Title: {article.get('title', 'No title')}\n")
-                f.write(f"Date: {article.get('publishedDate', 'No date')}\n")
-                f.write(f"Source: {article.get('site', 'Unknown source')}\n")
-                f.write(f"URL: {article.get('url', 'No URL')}\n\n")
-                f.write(article.get("text", "No article content available"))
-    
-    # Get sentiment data
-    sentiment = fmp_request(f"stock-news-sentiments/{ticker}", {"limit": 500})
-    if sentiment:
-        # Process sentiment data into a timeline
-        sentiment_timeline = {}
-        for item in sentiment:
-            date = item.get("publishedDate", "").split(" ")[0]
-            if date in sentiment_timeline:
-                sentiment_timeline[date].append({
-                    "title": item.get("title", ""),
-                    "sentiment": item.get("sentiment", ""),
-                    "sentimentScore": item.get("sentimentScore", 0)
-                })
-            else:
-                sentiment_timeline[date] = [{
-                    "title": item.get("title", ""),
-                    "sentiment": item.get("sentiment", ""),
-                    "sentimentScore": item.get("sentimentScore", 0)
-                }]
+        # Save as parquet file
+        os.makedirs(f"dataStore/companies/{ticker}", exist_ok=True)
+        df.to_parquet(f"dataStore/companies/{ticker}/news.parquet", engine='pyarrow')
         
-        # Save sentiment timeline
-        with open(get_data_path(ticker) / "news" / "sentiment_timeline.json", "w") as f:
-            json.dump(sentiment_timeline, f, indent=2)
+        console.log(f"News data saved for {ticker}")
+        return True
     
-    console.log(f"News and sentiment saved for {ticker}")
-    return True
+    return False
 
-def fetch_market_indices(years=5):
-    """Fetch and save market indices data."""
-    console.log("Fetching market indices data")
+# Market-wide data collection functions
+def collect_economic_indicators(years=3):
+    """Collect economic indicators."""
+    console.log("Collecting economic indicators")
     
-    indices = ["^GSPC", "^DJI", "^IXIC"]  # S&P 500, Dow Jones, NASDAQ
-    index_names = ["S&P 500", "Dow Jones", "NASDAQ"]
+    # Define indicators to collect
+    indicators = [
+        "GDP", "realGDP", "nominalPotentialGDP", "realGDPPerCapita", 
+        "federalFunds", "CPI", "inflationRate", "inflation", 
+        "retailSales", "consumerSentiment", "durableGoods", 
+        "unemploymentRate", "totalNonfarmPayroll", "initialClaims", 
+        "industrialProductionTotalIndex", "newPrivatelyOwnedHousingUnitsStartedTotalUnits", 
+        "totalVehicleSales", "retailMoneyFunds", "smoothedUSRecessionProbabilities"
+    ]
     
+    # Collect data for each indicator
     all_data = pd.DataFrame()
     
-    for idx, index_symbol in enumerate(indices):
-        console.log(f"Fetching data for {index_names[idx]} ({index_symbol})")
+    for indicator in indicators:
+        data = fmp_request(f"economic/{indicator}", {"limit": years * 12})  # Monthly data approximation
         
+        if data:
+            # Convert to DataFrame
+            df = pd.DataFrame(data)
+            df['indicator'] = indicator
+            
+            # Append to main DataFrame
+            all_data = pd.concat([all_data, df])
+    
+    # Save as parquet file
+    if not all_data.empty:
+        os.makedirs("dataStore/market", exist_ok=True)
+        all_data.to_parquet("dataStore/market/economic.parquet", engine='pyarrow')
+        
+        console.log("Economic indicators saved")
+        return True
+    
+    return False
+
+def collect_treasury_rates(years=3):
+    """Collect treasury rates."""
+    console.log("Collecting treasury rates")
+    
+    # Get treasury rates
+    data = fmp_request("treasury", {"limit": years * 250})  # Daily data approximation
+    
+    if data:
+        # Convert to DataFrame
+        df = pd.DataFrame(data)
+        
+        # Save as parquet file
+        os.makedirs("dataStore/market", exist_ok=True)
+        df.to_parquet("dataStore/market/treasury.parquet", engine='pyarrow')
+        
+        console.log("Treasury rates saved")
+        return True
+    
+    return False
+
+def collect_market_indexes(years=3):
+    """Collect market index data."""
+    console.log("Collecting market index data")
+    
+    # Define indexes to collect
+    indexes = ["^GSPC", "^DJI", "^IXIC"]  # S&P 500, Dow Jones, NASDAQ
+    
+    # Collect data for each index
+    all_data = pd.DataFrame()
+    
+    for index_symbol in indexes:
         end_date = datetime.now()
         start_date = end_date - timedelta(days=365 * years)
         
         data = fmp_request(f"historical-price-full/{index_symbol}", {
             "from": start_date.strftime("%Y-%m-%d"),
-            "to": end_date.strftime("%Y-%m-%d"),
-            "serietype": "line"
+            "to": end_date.strftime("%Y-%m-%d")
         })
         
-        if not data or "historical" not in data:
-            console.log(f"No data found for {index_symbol}")
-            continue
-        
-        df = pd.DataFrame(data["historical"])
-        df["index"] = index_names[idx]
-        
-        all_data = pd.concat([all_data, df])
+        if data and "historical" in data:
+            # Convert to DataFrame
+            df = pd.DataFrame(data["historical"])
+            df['symbol'] = index_symbol
+            
+            # Append to main DataFrame
+            all_data = pd.concat([all_data, df])
     
+    # Save as parquet file
     if not all_data.empty:
-        all_data.to_csv(get_data_path("market_data") / "index_data.csv", index=False)
-        console.log("Market indices data saved")
+        os.makedirs("dataStore/market", exist_ok=True)
+        all_data.to_parquet("dataStore/market/indices.parquet", engine='pyarrow')
+        
+        console.log("Market index data saved")
+        return True
     
-    return True
+    return False
 
-def fetch_all_data(ticker, years=5):
-    """Fetch all data for a ticker."""
-    console.log(f"Starting data collection for {ticker}", style="bold green")
+def collect_sector_pe_ratios():
+    """Collect sector P/E ratios."""
+    console.log("Collecting sector P/E ratios")
     
-    # Ensure directories exist
-    ensure_directories(ticker)
+    # Get sector P/E ratios
+    data = fmp_request("sector_price_earning_ratio", version="v4")
     
-    # Fetch all data types
-    fetch_company_profile(ticker)
-    fetch_financial_statements(ticker, years)
-    fetch_historical_prices(ticker, years)
-    fetch_sec_filings(ticker, years)
-    fetch_earnings_data(ticker, min(8, years * 4))  # 4 quarters per year
-    fetch_news_and_sentiment(ticker, 100)
+    if data:
+        # Convert to DataFrame
+        df = pd.DataFrame(data)
+        
+        # Save as parquet file
+        os.makedirs("dataStore/market", exist_ok=True)
+        df.to_parquet("dataStore/market/sector_pe.parquet", engine='pyarrow')
+        
+        console.log("Sector P/E ratios saved")
+        return True
     
-    console.log(f"Completed data collection for {ticker}", style="bold green")
-    return True
+    return False
 
-def fetch_data_for_companies(tickers, years=5):
-    """Fetch data for multiple companies and market indices."""
-    console.log("Starting data collection process", style="bold blue")
+# Event-based data collection functions
+def collect_material_events(days=90):
+    """Collect 8-K filings (material events) across companies."""
+    console.log("Collecting material events (8-K filings)")
     
-    # First fetch market indices for context
-    fetch_market_indices(years)
+    # Get RSS feed of 8-K filings
+    data = fmp_request("rss_feed_8k", version="v4")
     
-    # Then fetch data for each company
+    if data:
+        # Convert to DataFrame
+        df = pd.DataFrame(data)
+        
+        # Save as parquet file
+        os.makedirs("dataStore/events", exist_ok=True)
+        df.to_parquet("dataStore/events/material_events.parquet", engine='pyarrow')
+        
+        console.log("Material events saved")
+        return True
+    
+    return False
+
+def collect_insider_trading(limit=1000):
+    """Collect insider trading data across companies."""
+    console.log("Collecting insider trading data")
+    
+    # Get insider trading data
+    data = fmp_request("insider-trading", {"limit": limit})
+    
+    if data:
+        # Convert to DataFrame
+        df = pd.DataFrame(data)
+        
+        # Save as parquet file
+        os.makedirs("dataStore/events", exist_ok=True)
+        df.to_parquet("dataStore/events/insider_trading.parquet", engine='pyarrow')
+        
+        console.log("Insider trading data saved")
+        return True
+    
+    return False
+
+# Relationship data collection functions
+def collect_peer_relationships(tickers):
+    """Collect peer relationship data for a list of tickers."""
+    console.log("Collecting peer relationship data")
+    
+    # Collect peer data for each ticker
+    all_peers = pd.DataFrame()
+    
     for ticker in tickers:
-        fetch_all_data(ticker, years)
+        peers = fmp_request(f"stock_peers?symbol={ticker}")
+        
+        if peers:
+            # Convert to DataFrame
+            df = pd.DataFrame(peers)
+            df['source_ticker'] = ticker
+            
+            # Append to main DataFrame
+            all_peers = pd.concat([all_peers, df])
     
-    console.log("Data collection complete!", style="bold green")
+    # Save as parquet file
+    if not all_peers.empty:
+        os.makedirs("dataStore/relationships", exist_ok=True)
+        all_peers.to_parquet("dataStore/relationships/peers.parquet", engine='pyarrow')
+        
+        console.log("Peer relationship data saved")
+        return True
+    
+    return False
+
+def collect_supply_chain_relationships(tickers):
+    """Collect supply chain relationship data for a list of tickers."""
+    console.log("Collecting supply chain relationship data")
+    
+    # Collect supply chain data for each ticker
+    all_relationships = pd.DataFrame()
+    
+    for ticker in tickers:
+        relationships = fmp_request(f"stock_supply_chain/{ticker}")
+        
+        if relationships:
+            # Convert to DataFrame
+            df = pd.DataFrame(relationships)
+            df['source_ticker'] = ticker
+            
+            # Append to main DataFrame
+            all_relationships = pd.concat([all_relationships, df])
+    
+    # Save as parquet file
+    if not all_relationships.empty:
+        os.makedirs("dataStore/relationships", exist_ok=True)
+        all_relationships.to_parquet("dataStore/relationships/supply_chain.parquet", engine='pyarrow')
+        
+        console.log("Supply chain relationship data saved")
+        return True
+    
+    return False
+
+# Main collection functions
+def collect_company_data(ticker, years=3):
+    """Collect all data for a specific company."""
+    console.log(f"Starting data collection for {ticker}")
+    
+    # Collect company-specific data
+    collect_company_profile(ticker)
+    collect_company_financials(ticker, years)
+    collect_historical_prices(ticker, years)
+    collect_earnings_data(ticker, years * 4)  # Quarterly data
+    collect_sec_filings(ticker, years)
+    collect_company_news(ticker, 100)
+    
+    console.log(f"Completed data collection for {ticker}")
+    return True
+
+def collect_market_data(years=3):
+    """Collect market-wide data."""
+    console.log("Starting market data collection")
+    
+    # Collect market data
+    collect_economic_indicators(years)
+    collect_treasury_rates(years)
+    collect_market_indexes(years)
+    collect_sector_pe_ratios()
+    
+    console.log("Completed market data collection")
+    return True
+
+def collect_event_data():
+    """Collect event-based data."""
+    console.log("Starting event data collection")
+    
+    # Collect event data
+    collect_material_events()
+    collect_insider_trading()
+    
+    console.log("Completed event data collection")
+    return True
+
+def collect_relationship_data(tickers):
+    """Collect relationship data for a list of tickers."""
+    console.log("Starting relationship data collection")
+    
+    # Collect relationship data
+    collect_peer_relationships(tickers)
+    collect_supply_chain_relationships(tickers)
+    
+    console.log("Completed relationship data collection")
+    return True
+
+def collect_all_data(tickers, years=3):
+    """Collect all data for the SignalStore POC."""
+    console.log("Starting comprehensive data collection")
+    
+    # Ensure data structure exists
+    ensure_datastore_structure()
+    
+    # Collect company-specific data
+    for ticker in tickers:
+        collect_company_data(ticker, years)
+    
+    # Collect market-wide data
+    collect_market_data(years)
+    
+    # Collect event-based data
+    collect_event_data()
+    
+    # Collect relationship data
+    collect_relationship_data(tickers)
+    
+    console.log("Completed comprehensive data collection")
     return True
 
 if __name__ == "__main__":
     # Example usage
-    tickers = ["NVDA", "MSFT", "AAPL", "TSLA", "AMZN"]
-    fetch_data_for_companies(tickers, years=5)
+    target_companies = ["DELL", "NVDA", "TSLA", "ACN"]
+    collect_all_data(target_companies, years=3)
