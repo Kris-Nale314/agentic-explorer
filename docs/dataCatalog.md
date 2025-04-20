@@ -1,213 +1,183 @@
-# Agentic Explorer DataStore Plan
+# Agentic Explorer DataStore Plan - Updated
 
-This document outlines the phased approach for building and expanding our financial data repository for the Agentic Explorer project.
+This document outlines the current state and future directions for the financial data repository that powers the Agentic Explorer project's multi-agent intelligence systems.
 
-## Phase 1: Core Financial Data 
+## Current Implementation Status
 
-In this initial phase, we'll focus on data readily available through the Financial Modeling Prep (FMP) API to build a functional foundation.
+The Agentic Explorer DataStore currently contains comprehensive financial data for the following companies:
 
-### Companies for Initial Implementation
 - NVDA (NVIDIA)
+- F (Ford)
+- BA (Boeing)
+- DELL (Dell Technologies)
 - MSFT (Microsoft)
-- AAPL (Apple)
 - TSLA (Tesla)
+- TSM (TSMC)
+- ACN (Accenture)
+
+This provides a diverse cross-section of technology, manufacturing, and consulting sectors for our agent-based analysis.
+
+### Current Data Components
+
+#### Company-Specific Data
+- ✅ Company profiles and basic information
+- ✅ Financial statements (income, balance sheet, cash flow)
+- ✅ Stock price histories 
+- ✅ Earnings call transcripts
+- ✅ SEC filing metadata
+- ✅ Company-specific news articles
+
+#### Market-Wide Data
+- ✅ Economic indicators
+- ✅ Treasury rates
+- ✅ Market indexes (S&P 500, Dow Jones, NASDAQ)
+- ✅ Sector P/E ratios
+
+#### Event-Based Data
+- ✅ Material events (8-K filings)
+- ✅ Insider trading data
+
+#### Relationship Data
+- ✅ Peer relationships
+- ✅ Supply chain relationships
+
+## Data Handling Behavior
+
+**Important Note about Data Collection Process:**
+- The current data collection scripts **will overwrite existing files** when run again
+- Each data collection function uses standard file writing modes that replace content
+- Examples include `json.dump(data, f, indent=2)` using the `"w"` mode and `df.to_parquet()` without append options
+
+For adding new companies or updating existing ones:
+1. Running `collect_company_data(ticker, years)` for a new ticker will create and populate a new company directory
+2. Running it for an existing ticker will replace that company's data files with fresh data
+3. Running `collect_all_data(tickers, years)` will refresh all specified companies and shared data
+
+## Phase 2: Enhanced Data Scope
+
+Building on our solid foundation, we plan to expand along the following dimensions:
+
+### New Companies to Add
 - AMZN (Amazon)
+- AAPL (Apple)
+- INTC (Intel)
+- GOOG (Alphabet/Google)
+- JPM (JPMorgan Chase)
+- UNH (UnitedHealth Group)
+- PFE (Pfizer)
+- XOM (Exxon Mobil)
 
-### Phase 1 Data Components
+This expansion will provide broader sector coverage including consumer tech, finance, healthcare, and energy.
 
-#### Stock Price Data
-- [x] Daily stock prices (5 years)
-- [x] Major index data (S&P 500, NASDAQ, Dow Jones)
-- [x] Basic peer comparison data
+### Extended Historical Range
+- Increase historical data range from 3 to 5 years where appropriate
+- Provide agents with longer-term patterns for trend analysis
 
-#### Financial Statements
-- [x] Quarterly income statements (5 years)
-- [x] Quarterly balance sheets (5 years)
-- [x] Quarterly cash flow statements (5 years)
-- [x] Annual financial statements (5 years)
+### Enhanced Financial Context
+- Add pre-calculated financial ratios for easier agent analysis
+- Include industry average benchmarks for comparative analysis
+- Incorporate sector-specific economic indicators
 
-#### SEC Filings
-- [x] 10-K annual reports (5 years)
-- [x] 10-Q quarterly reports (5 years)
-- [x] 8-K significant event reports (selective, last 2 years)
+### Improved Relationship Mapping
+- Expand peer comparison data (5-7 competitors per company)
+- Enhance supply chain mapping with deeper upstream/downstream connections
+- Add cross-industry relationship data to identify hidden correlations
 
-#### Earnings Information
-- [x] Earnings call transcripts (8 quarters)
-- [x] Earnings surprises and estimates
+## Phase 3: Advanced Data Integration
 
-#### News and Sentiment
-- [x] Company-specific news articles (FMP News by Ticker API)
-- [x] Basic sentiment data (FMP Sentiment API)
+Our long-term vision includes integrating more sophisticated data sources:
 
-#### Analyst Coverage
-- [x] Analyst ratings history
-- [x] Price targets
-- [x] Consensus estimates
+### Alternative Data Sources
+- Google Trends data for product interest (via PyTrends)
+- Social media sentiment aggregates (if publicly available)
+- Patent filing activity (via USPTO public data)
 
-## Phase 2: Enhanced Financial Context
+### Advanced Analytics
+- Technical indicators pre-calculation
+- Cross-asset correlation matrices
+- Market sentiment indices
 
-Building on the foundation, Phase 2 adds more contextual data and extends the historical range.
+### Strategic Context Enhancement
+- Executive change history
+- Product launch timeline integration
+- Competitive product mapping
 
-#### Stock Price Data (Extensions)
-- [ ] Extended history (10 years)
-- [ ] More detailed peer comparison (5-7 competitors per company)
-- [ ] Sector-specific indices
-- [ ] VIX correlation data
+## Implementation Plan
 
-#### Financial Analysis
-- [ ] Pre-calculated financial ratios
-- [ ] Growth rate calculations
-- [ ] Peer comparative analysis
-- [ ] Industry average benchmarks
+### Short-Term Actions (Next 2 Weeks)
+1. **Backup Current DataStore**:
+   ```bash
+   # Create a timestamped backup before major changes
+   cp -r dataStore dataStore_backup_$(date +%Y%m%d)
+   ```
 
-#### SEC Filings (Extensions)
-- [ ] Proxy statements (DEF 14A)
-- [ ] Insider trading reports (Forms 3, 4, 5)
-- [ ] Full 8-K coverage (5 years)
+2. **Add New Companies Individually**:
+   ```bash
+   # Run for each new company to avoid disrupting existing data
+   python -m utils.run_data_collector --single AMZN --years 3
+   python -m utils.run_data_collector --single AAPL --years 3
+   # ... and so on for other new companies
+   ```
 
-#### News and Sentiment (Extensions)
-- [ ] Curated significant event timeline
-- [ ] Topic categorization of news
-- [ ] Extended sentiment analysis
-- [ ] Industry news that impacts target companies
+3. **Update Market-Wide Data**:
+   ```bash
+   # Refresh shared data without touching company data
+   python -m utils.run_data_collector --market --years 3
+   ```
 
-#### Macro Context
-- [ ] Interest rate data
-- [ ] Inflation data
-- [ ] Industry-specific economic indicators
-- [ ] Market sector rotation data
+### Mid-Term Enhancements (Next Month)
+1. **Modify Collector Scripts**:
+   - Add options to preserve/merge existing data
+   - Implement incremental updates for efficiency
+   - Add data validation and gap detection
 
-## Phase 3: Advanced and Alternative Data
+2. **Create Data Quality Reports**:
+   - Develop scripts to check data completeness
+   - Identify missing periods or anomalies
+   - Generate coverage statistics for agent evaluation
 
-The final phase incorporates alternative data sources and advanced analytics to provide deeper insights.
+### Long-Term Strategy (Next Quarter)
+1. **Data Integration Framework**:
+   - Design systems to integrate alternative data sources
+   - Build connectors for additional APIs
+   - Implement data normalization for cross-source analysis
 
-#### Alternative Data
-- [ ] Google Trends data for product interest
-- [ ] Web traffic data (if publicly available)
-- [ ] Social media sentiment trends
-- [ ] App download statistics (for relevant companies)
-- [ ] Patent filing activity
+2. **Signal Index Foundations**:
+   - Begin preliminary calculation of signal indices
+   - Store pre-computed metrics for agent efficiency
+   - Create benchmark values for comparison
 
-#### Advanced Analytics
-- [ ] Pre-calculated technical indicators
-- [ ] Volatility measures
-- [ ] Correlation matrices
-- [ ] Factor analysis results
+## Usage with Agentic Explorer
 
-#### Enhanced News Analysis
-- [ ] Event impact modeling
-- [ ] News classification by materiality
-- [ ] Supply chain news mapping
-- [ ] Competitive landscape mapping
+The DataStore is designed to support all key application modules:
 
-#### Strategic Context
-- [ ] Product launch timeline
-- [ ] Executive change history
-- [ ] Competitive product comparison
-- [ ] Market share evolution data
+1. **Company Deep Dive Analysis**: Leverages company-specific data
+2. **News Impact Validator**: Uses news and price correlation data
+3. **Prediction Challenge Simulator**: Relies on historical patterns
+4. **Agent Resilience Tester**: Tests with complete and partial data
+5. **Multi-Company Comparative Analysis**: Utilizes relationship mapping
 
-## Implementation Notes
+## Data Storage Considerations
 
-### Data Collection Automation
+Current storage requirements are approximately 350-400MB per company, with market-wide data adding another 250MB. As we expand to include more companies and extend historical ranges, we anticipate the following:
 
-We'll create scripts to automate the collection and organization of data:
+- **Current DataStore**: ~3-4GB
+- **Phase 2 Expansion**: ~8-10GB
+- **Phase 3 (with Alternative Data)**: ~15-20GB
 
-```python
-# Example script structure
-def fetch_and_organize_company_data(ticker, years=5):
-    """
-    Fetch and organize all Phase 1 data for a given company
-    """
-    # Create necessary directories
-    os.makedirs(f"dataStore/{ticker}/price_data", exist_ok=True)
-    os.makedirs(f"dataStore/{ticker}/financials/quarterly", exist_ok=True)
-    os.makedirs(f"dataStore/{ticker}/financials/annual", exist_ok=True)
-    os.makedirs(f"dataStore/{ticker}/filings", exist_ok=True)
-    os.makedirs(f"dataStore/{ticker}/earnings_calls", exist_ok=True)
-    os.makedirs(f"dataStore/{ticker}/news", exist_ok=True)
-    os.makedirs(f"dataStore/{ticker}/analyst", exist_ok=True)
-    
-    # Fetch daily prices
-    fetch_daily_prices(ticker, years)
-    
-    # Fetch financial statements
-    fetch_financial_statements(ticker, years)
-    
-    # Fetch SEC filings
-    fetch_sec_filings(ticker, years)
-    
-    # Fetch earnings data
-    fetch_earnings_data(ticker, years)
-    
-    # Fetch news and sentiment
-    fetch_news_and_sentiment(ticker, years)
-    
-    # Fetch analyst coverage
-    fetch_analyst_coverage(ticker, years)
-```
+This remains well within reasonable limits for local development and exploration.
 
-### Data Quality Considerations
+## Notes on API Usage
 
-For each phase, we'll implement quality checks and enrichment:
+Our data collection relies primarily on the Financial Modeling Prep (FMP) API. Be mindful of rate limits when collecting data for multiple companies:
 
-1. **Completeness Check**: Ensure no significant gaps in time series data
-2. **Consistency Check**: Validate data formats and units across sources
-3. **Deduplication**: Remove redundant information, especially in news
-4. **Normalization**: Standardize formats for easier agent consumption
-5. **Metadata Enrichment**: Add contextual tags to improve searchability
-
-### File Naming Conventions
-
-We'll adopt consistent naming conventions for all files:
-
-- Stock data: `{ticker}_daily_prices_{start_date}_{end_date}.csv`
-- Financials: `{ticker}_{statement_type}_{period}_{year}{quarter}.json`
-- Filings: `{ticker}_{filing_type}_{date}.txt`
-- News: `{ticker}_news_{date}_{id}.txt`
-- Sentiment: `{ticker}_sentiment_{start_date}_{end_date}.csv`
-
-## Data Storage Requirements
-
-### Phase 1 Estimates
-- Stock price data: ~10MB per company
-- Financial statements: ~50MB per company
-- SEC filings: ~100MB per company
-- Earnings data: ~20MB per company
-- News articles: ~200MB per company
-- Analyst data: ~5MB per company
-
-**Total per company**: ~385MB
-**Total for 5 companies**: ~1.9GB
-
-### Phase 2-3 Estimates
-- Approximately 3x Phase 1 requirements
-- **Projected total at Phase 3**: ~6GB
-
-## FMP API Endpoints Reference
-
-For Phase 1 implementation, we'll use these primary FMP API endpoints:
-
-- Historical Stock Prices: `/historical-price-full/{ticker}`
-- Financial Statements: `/income-statement/{ticker}`, `/balance-sheet-statement/{ticker}`, `/cash-flow-statement/{ticker}`
-- SEC Filings: `/sec_filings/{ticker}`
-- Earnings: `/earnings-call-transcript/{ticker}`, `/earnings-surprises/{ticker}`
-- News: `/stock_news?tickers={ticker}`, `/stock-news-sentiments/{ticker}`
-- Analyst: `/analyst-estimates/{ticker}`, `/upgrades-downgrades?symbol={ticker}`
+- Basic API plan: 250-300 requests per day
+- Collecting full data for a single company requires ~25-30 API calls
+- Consider spreading large collection jobs across multiple days
 
 ## Next Steps
 
-1. Create the data collection script for Phase 1
-2. Implement quality checks and validation
-3. Document the structure of each data file 
-4. Build basic agent interactions using Phase 1 data
-5. Evaluate data gaps and prioritize Phase 2 additions
-
-## Notes on Future Data Sources
-
-As we move to Phases 2 and 3, we'll likely need to incorporate additional data sources beyond FMP:
-
-- Yahoo Finance API for alternative market data
-- Alpha Vantage for additional financial metrics
-- SEC EDGAR direct access for fuller filing coverage
-- Google Trends API for product interest data
-- News APIs for broader coverage
+1. Backup current DataStore before any major updates
+2. Add priority new companies one at a time
+3. Consider modifying collection scripts to support incremental updates
+4. Expand historical range for key companies once core coverage is complete
